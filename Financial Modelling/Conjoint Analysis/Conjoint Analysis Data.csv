@@ -1,0 +1,9 @@
+levels,,Bundle No,speed,capacity,price,Preference_rankwise,Score
+fast,,1,1,1,1,2,7
+slow,,2,1,1,2,4,5
+onecup,,3,1,2,1,1,8
+twocups,,4,1,2,2,3,6
+cheap,,5,2,1,1,5,4
+expensive,,6,2,1,2,8,1
+,,7,2,2,1,6,3
+,,8,2,2,2,7,2
