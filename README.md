@@ -13,6 +13,11 @@ Applied Apriori algorithm in R to discover high-confidence item pairings. Simula
 ### 📌 [Salary Prediction – HR Analytics](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Salary%20Prediction)
 Built regression model to predict salary based on experience and education. Simulated its use in compensation benchmarking.
 
+## 🔍 Conjoint Analysis Projects
+
+- 📘 [Academic CBC Simulation](./Conjoint%20Analysis/Academic_CBC_Project)
+- 💻 [Laptop Preference GTM Case Study](./Conjoint%20Analysis/Laptop_Preference_Case_Study)
+
 ---
 
 ## Tools Used
