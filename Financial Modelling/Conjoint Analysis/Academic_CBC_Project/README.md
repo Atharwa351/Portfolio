@@ -1,1 +1,1 @@
-Placeholder README for Academic CBC Project
+Academic Conjoint Analysis project
