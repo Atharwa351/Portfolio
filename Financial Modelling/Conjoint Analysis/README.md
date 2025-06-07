@@ -1,1 +1,4 @@
-Laptop_Preference_Case_Study/README.md
+### 🧪 Conjoint Analysis Projects  
+- 📘 [Academic CBC Simulation](link)
+- 💻 [Laptop Preference GTM Case Study](link)
+
