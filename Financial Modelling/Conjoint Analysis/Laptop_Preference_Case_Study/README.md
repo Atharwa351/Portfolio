@@ -9,7 +9,7 @@ Simulate product-market fit for three laptop configurations by analyzing custome
 - Inform pricing tiers and SKU strategy
 
 ## 🛠️ Tools Used
-- R (conjoint package)
+- Python
 - Excel for data prep
 - Heatmap and utility plots
 
