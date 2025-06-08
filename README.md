@@ -1,33 +1,47 @@
-# Portfolio – Atharwa Malawade
+# 📊 Portfolio – Atharwa Malawade
 
-A curated collection of business-focused analytics projects applying R, Python, SQL, Excel, and Power BI to real-world problems in Revenue Operations, Sales Strategy, and GTM Analytics.
+A business-first analytics portfolio applying R, Python, SQL, Excel, and Power BI to real-world challenges in **Revenue Operations**, **Sales Strategy**, and **GTM Analytics**.
 
-## Featured Projects
+---
 
-### 📌 [Conjoint Analysis – Laptop Preferences](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis)
-Modeled product-market fit across 100+ buyer personas using R. Estimated marginal utility to inform pricing strategy and product roadmap design.
+## 🔍 Featured Projects
 
-### 📌 [Market Basket – Retail Cross-Sell Optimization](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis')
-Applied Apriori algorithm in R to discover high-confidence item pairings. Simulated promotions to maximize AOV and optimize inventory placement.
+### 📌 Conjoint Analysis – Laptop Buyer Preferences
+Modeled product-market fit across 100+ buyer personas using R. Estimated marginal utilities to guide pricing and roadmap decisions.
 
-### 📌 [CLTV & Expense Prediction – Behavioral Segmentation Project](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/CLTV%20Analysis)
-Inform marketing personalization, cross-sell, and churn prevention efforts.Support GTM decisions by identifying profitable segments.
+### 📌 Market Basket Analysis – Retail Cross-Sell Optimization
+Applied Apriori algorithm in R to identify high-confidence item pairings. Informed promotional design to increase AOV and optimize shelf placement.
 
-### 📌 [Sales Forecasting – Time Series Revenue Analysis](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Sales%20Forecasting)
-Estimate future revenue based on trends and seasonality. Improve RevOps accuracy in quarterly planning and GTM campaigns.
+### 📌 CLTV & Expense Prediction – Behavioral Segmentation
+Segmented customers based on spend and retention patterns. Supported churn mitigation and personalized GTM outreach.
 
-### 📌 [Salary Prediction – HR Analytics](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Salary%20Prediction)
-Built regression model to predict salary based on experience and education. Simulated its use in compensation benchmarking.
+### 📌 Sales Forecasting – Time Series Revenue Trends
+Built models to project quarterly revenue based on trend and seasonality. Enhanced planning accuracy for RevOps and Sales Ops.
 
-### 📌 [Admission Chance Prediction – Logistic Regression Model](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Admission%20Prediction)
-Simulate university selection engine. Support academic ops with data-driven selection policy.
+### 📌 Salary Prediction – HR Compensation Benchmarking
+Created regression model using Python to predict salary based on education and experience. Informed equitable pay policy design.
 
-### 📌 [Time Series Forecasting – Sales Trend Modeling](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Time%20Series)
-Simulate university selection engine. Support academic ops with data-driven selection policy.
+### 📌 Admission Prediction – Academic Ops Modeling
+Used logistic regression to estimate admission chances. Built prototype tool to support data-driven selection policy.
 
-## Tools Used
-- **Languages**: Python, R, SQL
-- **BI Tools**: Power BI, Tableau, Excel
-- **Techniques**: Forecasting, Conjoint, Market Basket, Regression, Funnel Metrics
+### 📌 MNIST Classification – Digit Recognition
+Built image classifier using feedforward neural network and backpropagation. Demonstrated grasp of foundational ML techniques.
 
-📫 Connect on [LinkedIn](https://www.linkedin.com/in/atharwa-malawade-916618222/)
+### 📌 Backpropagation & Gradient Descent – Optimization from Scratch
+Implemented neural network training from first principles. Gained deep understanding of loss minimization dynamics.
+
+---
+
+## 🧰 Tools & Techniques
+
+**Languages:** Python, R, SQL  
+**BI & Productivity:** Power BI, Tableau, Excel  
+**Analytics Techniques:** Forecasting, Conjoint Analysis, Market Basket, Segmentation, Regression, Funnel Metrics
+
+---
+
+## 📫 Let’s Connect
+
+🔗 [LinkedIn – Atharwa Malawade](https://www.linkedin.com/in/atharwa-malawade-916618222/)
+
+---
