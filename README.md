@@ -15,11 +15,11 @@ Simulates product-market fit using choice-based conjoint modeling on self-collec
 
 ---
 
-###  [Market Basket Analysis – Retail GTM Optimization (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis)
+###  [Market Basket Analysis – Retail GTM Optimization (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis/Grocery_Retail_Market_Basket_Analysis)
 Used Apriori algorithm to identify high-lift item combos for cross-sell and GTM promos.
 
-- **Tools**: R (arules, arulesViz)  
-- **Insights**: “Whole milk” identified as anchor product across 200+ strong rules  
+- **Tools**: R (arules, arulesViz)
+- **Insights**: “Whole milk” identified as anchor product across 200+ strong rules
 - **RevOps Application**: Combo offers, campaign design, shelf placement strategy
 
 ---
