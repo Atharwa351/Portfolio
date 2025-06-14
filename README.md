@@ -47,8 +47,12 @@ Created regression model using Python to predict salary based on education and e
 ### 📌 Admission Prediction – Academic Ops Modeling  
 Used logistic regression to estimate admission chances. Built prototype tool to support data-driven selection policy.
 
-### 📌 MNIST Classification – Digit Recognition  
-Built image classifier using feedforward neural network and backpropagation. Demonstrated grasp of foundational ML techniques.
+### 🔵 RevOps Trend Forecasting – Manual Gradient Descent Optimizer  
+Forecasted revenue/SQL trends using a custom-built gradient descent model to simulate lead velocity over time. Validated outputs using OLS regression (R² = 0.88). Useful for CRM data forecasting in early-stage GTM setups.  
+**Tech:** Python, NumPy, statsmodels  
+**RevOps Use Case:** Forecasting lead/revenue trends, modeling early pipeline dynamics  
+🔗 [View Repo](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Gradient%20Descent)
+
 
 ### 📌 Backpropagation & Gradient Descent – Optimization from Scratch  
 Implemented neural network training from first principles. Gained deep understanding of loss minimization dynamics.
