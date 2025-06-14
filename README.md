@@ -15,7 +15,7 @@ Simulates product-market fit using choice-based conjoint modeling on self-collec
 
 ---
 
-###  [Market Basket Analysis – Retail GTM Optimization (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis)
+###  [Market Basket Analysis – Retail GTM Optimization (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis')
 Used Apriori algorithm to identify high-lift item combos for cross-sell and GTM promos.
 
 - **Tools**: R (arules, arulesViz)
