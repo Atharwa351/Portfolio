@@ -6,8 +6,12 @@ A business-first analytics portfolio applying R, Python, SQL, Excel, and Power B
 
 ##  Featured Projects
 
-### 📌 Conjoint Analysis – Laptop Buyer Preferences  
-Modeled product-market fit across 100+ buyer personas using R. Estimated marginal utilities to guide pricing and roadmap decisions.
+### [Laptop Conjoint Analysis – GTM Feature Prioritization (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Laptop_Preference_Case_Study)
+> *End-to-end project with self-collected survey data. Simulates product-market fit using conjoint-style analysis to guide pricing, bundling, and launch configuration strategy.*
+
+- Tools: Python (Scikit-Learn, Regression, Isolation Forest)
+- Insights: RAM, Price, Screen Size were most influential in preference modeling
+- RevOps Relevance: Supports GTM teams in SKU design, tier pricing, and forecast alignment
 
 ### 📌 Market Basket Analysis – Retail Cross-Sell Optimization  
 Applied Apriori algorithm in R to identify high-confidence item pairings. Informed promotional design to increase AOV and optimize shelf placement.
