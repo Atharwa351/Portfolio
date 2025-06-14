@@ -61,6 +61,12 @@ Simulated a visual-input classification pipeline using MNIST to replicate workfl
 🔗 [View Repo](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/MNIST%20Classification)
 
 
+### 🔴 Revenue Forecasting with Neural Backpropagation – TensorFlow  
+Used TensorFlow’s Keras API to model revenue growth and lead performance trends with a simple Dense-layer network. Simulated predictions from structured CRM-like data with 250 training epochs.  
+**Tech:** Python, TensorFlow, Keras  
+**RevOps Use Case:** Continuous forecasting, lead scoring, metric uplift modeling  
+🔗 [View Repo](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Back%20Propogation)
+
 ---
 
 ## 🧪 Research & Strategy Projects
