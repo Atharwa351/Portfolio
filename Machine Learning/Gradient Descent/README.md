@@ -1,36 +1,63 @@
-RevOps Trend Forecasting – Manual Gradient Descent Optimizer
- Forecasting pipeline or revenue growth by manually modeling linear regression using gradient descent. Built for GTM teams that want to simulate trends from raw CRM exports.
+# RevOps Trend Forecasting – Manual Gradient Descent Optimizer
 
-• Tools & Tech Used:
-Python (NumPy, matplotlib, statsmodels)
-Jupyter Notebook
-Custom gradient-based optimization logic
+📈 *Forecasted pipeline or revenue growth by manually modeling linear regression using gradient descent. Built to simulate how GTM teams can track and project performance using basic time-series CRM exports.*
 
-• Business Insight(s) Extracted:
-Error convergence patterns in manual forecast modeling
-Comparison with OLS regression (R² = 0.88)
-Use of slope/intercept to simulate future revenue or lead volume
+---
 
-• GTM / RevOps Application:
-Forecasting revenue or SQL velocity over time
-Modeling lift from campaign performance
-Teaching junior analysts model fundamentals
-Replacing black-box tooling with transparent logic
+### • Tools & Tech Used:
+- Python (NumPy, matplotlib, statsmodels)
+- Jupyter Notebook
+- Custom gradient descent implementation
+- OLS regression for benchmarking
 
-• Visualizations:
-Gradient descent error reduction (slope/intercept)
-Actual vs. predicted line overlay
-OLS regression summary (included in notebook)
+---
 
+### • Business Insight(s) Extracted:
+- Visualized convergence patterns in slope (`a`) and intercept (`b`)
+- Demonstrated model improvement via error minimization
+- Validated model accuracy using OLS (R² = 0.88)
+- Predicted performance trends using limited data
 
-• Folder Structure:
-bash
-Copy
-Edit
+---
+
+### • GTM or RevOps Application:
+- Forecasting SQL or revenue growth from CRM snapshots  
+- Modeling uplift from campaigns or demand-gen pushes  
+- Predictive logic for lead flow, deal size, or funnel health  
+- Lightweight analytics for early-stage ops teams with no BI tooling
+
+---
+
+### • Output Summary:
+- Gradient Descent → Slope = 0.0636 | Intercept = 7.339
+- OLS Regression → Slope = 7.2878 | Intercept = 13.881
+- R² = 0.884
+
+  
+---
+
+### • Visualizations:
+- Error reduction over time for `a` and `b`
+- Final predicted line vs. actual values
+- OLS regression summary from `statsmodels`
+
+---
+
+### • What I’d Improve Next:
+- Add multivariate regression for deeper CRM use cases  
+- Simulate real pipeline stages as categorical variables  
+- Integrate Power BI or Tableau dashboards for exec visibility  
+- Plug into CRM exports (CSV/Excel) for live modeling
+
+---
+
+## 📁 Folder Structure:
+```bash
 Gradient Descent/
 │
-├── Gradient_Descent_RevOps.ipynb    # Core model and visualizations
-├── screenshots/                     # Output plots and regression visual
+├── Gradient_Descent_RevOps.ipynb    # Core model logic + plots
+├── screenshots/                     # Output graphs (optional)
 └── README.md                        # This file
 
-🔗 Return to Main Portfolio: https://github.com/Atharwa351/Portfolio
+🔗 Repo Link
+🔗 View Full Project on GitHub
