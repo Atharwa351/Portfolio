@@ -54,8 +54,12 @@ Forecasted revenue/SQL trends using a custom-built gradient descent model to sim
 🔗 [View Repo](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Gradient%20Descent)
 
 
-### 📌 Backpropagation & Gradient Descent – Optimization from Scratch  
-Implemented neural network training from first principles. Gained deep understanding of loss minimization dynamics.
+### 🟡 Customer Intent Classification – MNIST Digit Recognition  
+Simulated a visual-input classification pipeline using MNIST to replicate workflows like CRM form digitization, ticket triage, or inbound query classification. Achieved 97.5% accuracy using basic deep learning layers.  
+**Tech:** Python, Keras, TensorFlow  
+**RevOps Use Case:** Support ticket routing, form OCR, customer intent modeling  
+🔗 [View Repo](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/MNIST%20Classification)
+
 
 ---
 
