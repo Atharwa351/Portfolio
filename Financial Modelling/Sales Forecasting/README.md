@@ -1,40 +1,54 @@
-# 📈 Sales Forecasting – Time Series Revenue Analysis
+# Sales Forecasting – Weekly Store Revenue Time Series
 
-## 🎯 Objective
-To forecast monthly sales based on historical performance data using time series models. The goal is to support **inventory planning**, **resource allocation**, and **revenue projection** for upcoming business quarters.
-
-## 🧠 Business Use Case
-- Estimate future revenue based on trends and seasonality
-- Align sales targets and inventory planning with forecasted demand
-- Improve **RevOps accuracy** in quarterly planning and GTM campaigns
-
-## 🛠️ Tools & Techniques
-- Tools: Python (pandas, statsmodels), R, or Excel
-- Models: ARIMA / Exponential Smoothing / Moving Average
-- Evaluation: RMSE, AIC, Residual Analysis
-
-## 📊 Key Visuals
-Located in `/visuals/` folder:
-- `sales_trend.png`: Historical monthly sales  
-- `forecast_vs_actual.png`: Forecast accuracy visualized  
-- `residual_plot.png`: Model fit & stationarity check
-
-## 📈 Output Summary
-- Forecasted next 3 months of sales with 90% confidence interval
-- Captured seasonal dips in Q2 and spike in holiday quarter
-- RMSE: 12,300 | Forecast accuracy ~87%
-- Recommended buffer inventory of +15% for Q4 based on historical variance
-
-## 📂 Files
-- `sales_data.csv` – Raw monthly sales data  
-- `forecast_model.ipynb` – Model building and diagnostics  
-
-## ✅ Business Value
-This forecasting model can be embedded in a **RevOps dashboard** to:
-- Track predicted vs actual revenue
-- Prepare sales teams for demand surges or dips
-- Power proactive GTM planning and quota setting
+### Objective  
+Forecast weekly sales using historical store data to support **inventory planning**, **resource allocation**, and **revenue projection** for upcoming quarters.
 
 ---
 
-📁 [Back to Portfolio](https://github.com/Atharwa351/Portfolio)
+## RevOps & GTM Use Case  
+This project simulates how **RevOps teams** can leverage time-series forecasting to:  
+- Align **sales targets** and **operations plans**  
+- Prepare for seasonal demand changes  
+- Detect holiday spikes and stock buffers  
+- Improve accuracy in quarterly GTM campaigns
+
+---
+
+## Tools & Techniques  
+- Python (Pandas, Statsmodels, SKlearn metrics)  
+- Models: Simple/Triple Exponential Smoothing, ARIMA via `pmdarima`  
+- Evaluation metrics: MAE, MAPE, MSE, RMSE  
+- Trend & seasonality decomposition (Additive/Multiplicative)
+
+---
+
+## Key Visuals  
+Located in `/visuals` folder, including:  
+- `sales_trend.png`: Weekly revenue trend line  
+- `forecast_vs_actual.png`: Model accuracy  
+- `residual_plot.png`: Stationarity and model fit
+
+---
+
+## Output Summary  
+- **ARIMA model** achieved MAE=371, MAPE=2.8%, RMSE=440  
+- **Seasonal spikes** flagged during holidays; **Q4 buffer of +15%** advised  
+- Forecast aligned with trend decomposition, giving confidence in operational plans
+
+---
+
+## Files  
+| File | Description |
+|------|-------------|
+| `Sales_data.xlsx` | Historic weekly store sales data |
+| `forecast_model.ipynb` | Time-series decomposition & forecasting pipeline |
+| `/visuals/` | Model output visuals |
+
+---
+
+## RevOps Value Add  
+> “This model helps RevOps teams predict revenue ahead of time, flagging demand peaks, enabling quota adjustments, and aligning inventory with pipeline forecasts.”
+
+---
+
+🔗 [Return to Portfolio](https://github.com/Atharwa351/Portfolio)
