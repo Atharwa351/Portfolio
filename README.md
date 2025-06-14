@@ -115,6 +115,15 @@ Analyzed traffic effects on informal vendors using field data and stratified sam
 
 ---
 
+### [Academic CBC Conjoint Analysis – Attribute Utility Modeling (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Academic_CBC_Project)
+Used choice-based conjoint analysis in R to simulate product utility, preference shares, and attribute importance using academic survey data.
+
+- **Tools**: R (conjoint, MASS, ggplot2)
+- **Insights**: Speed had highest utility (68%), while price drove secondary influence
+- **RevOps Application**: Feature prioritization, SKU configuration, new product GTM modeling
+
+---
+
 ##  Certifications
 
 🔗 [Certifications Folder →](https://github.com/Atharwa351/Portfolio/tree/main/Certification)
