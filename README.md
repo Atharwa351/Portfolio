@@ -106,6 +106,15 @@ Used choice-based conjoint analysis in R to simulate product utility, preference
 
 ---
 
+### [TCS Price Movement Dashboard – Power BI RevOps Simulation](https://github.com/Atharwa351/Portfolio/tree/main/PowerBI)  
+Built a Power BI dashboard from real stock market data to simulate daily revenue trends, forecasting readiness, and GTM anomaly tracking.
+
+- **Tools**: Power BI, Excel, DAX  
+- **Insights**: Modeled daily % change, 7-day and 30-day SMAs, and volume spikes  
+- **RevOps Application**: Trend-based forecasting, GTM campaign timing, pipeline volatility awareness
+
+---
+
 ##  Research & Strategy Projects
 
 ###  [Birla Opus – GTM Market Entry Strategy](https://github.com/Atharwa351/Portfolio/tree/main/Research%20Papers/Birla%20OPUS%20Market%20Research)
