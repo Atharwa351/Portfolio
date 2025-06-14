@@ -1,25 +1,25 @@
 # Academic CBC Conjoint Analysis – Product Utility Modeling in R
 
-📍 [Project Repo](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Academic_CBC_Project)
+ [Project Repo](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Academic_CBC_Project)
 
 This project performs a choice-based conjoint (CBC) analysis using R to estimate customer preferences across speed, capacity, and price attributes. Built on academic survey data, it simulates product utility, importance scores, and shares of preference using max utility and BTL models.
 
 ---
 
-## 🔍 Objective
+##  Objective
 
 Estimate the importance of product attributes and simulate buyer behavior using choice-based data from a manually constructed CBC survey. Designed to replicate market preference modeling tasks commonly seen in RevOps-driven GTM analysis.
 
 ---
 
-## 🛠️ Tools & Packages Used
+##  Tools & Packages Used
 
 - R (v4.4+)
 - Libraries: `conjoint`, `MASS`, `reshape`, `reshape2`, `dplyr`, `ggplot2`
 
 ---
 
-## 🧪 Methodology
+##  Methodology
 
 - **Data Inputs**:  
   - `profiles.csv`: 8 unique product profiles  
@@ -34,7 +34,7 @@ Estimate the importance of product attributes and simulate buyer behavior using 
 
 ---
 
-## 📈 Key Results
+##  Key Results
 
 - **Attribute Importance**:  
   - Speed: **68%**  
@@ -51,7 +51,7 @@ Estimate the importance of product attributes and simulate buyer behavior using 
 
 ---
 
-## 🧠 Business Insight
+##  Business Insight
 
 - Fast speed clearly dominates preference, while capacity has minimal influence.
 - Pricing remains a sensitive but secondary attribute—useful for bundling, discounts, or freemium GTM design.
@@ -59,7 +59,7 @@ Estimate the importance of product attributes and simulate buyer behavior using 
 
 ---
 
-## 🧰 Files Included
+##  Files Included
 
 | File              | Description                                         |
 |-------------------|-----------------------------------------------------|
@@ -70,7 +70,7 @@ Estimate the importance of product attributes and simulate buyer behavior using 
 
 ---
 
-## 💼 RevOps Application
+##  RevOps Application
 
 > This academic CBC model demonstrates how RevOps teams can simulate product-market fit and forecast SKU preference using quantitative buyer utility modeling.
 
@@ -80,7 +80,7 @@ Estimate the importance of product attributes and simulate buyer behavior using 
 
 ---
 
-## 📌 Related Projects
+##  Related Projects
 
 - [Laptop Conjoint Analysis – GTM Feature Prioritization (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Laptop_Preference_Case_Study)
 
