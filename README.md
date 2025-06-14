@@ -13,8 +13,14 @@ A business-first analytics portfolio applying R, Python, SQL, Excel, and Power B
 - Insights: RAM, Price, Screen Size were most influential in preference modeling
 - RevOps Relevance: Supports GTM teams in SKU design, tier pricing, and forecast alignment
 
-### 📌 Market Basket Analysis – Retail Cross-Sell Optimization  
-Applied Apriori algorithm in R to identify high-confidence item pairings. Informed promotional design to increase AOV and optimize shelf placement.
+Market Basket Analysis – Retail GTM Optimization (R)
+Analyzed grocery transaction patterns using Apriori algorithm in R. Identified high-lift item combos (e.g., milk + yogurt + rolls) for promotional bundling, shelf layout, and cross-sell strategies.
+
+Tools: R (arules, arulesViz, ggplot2)
+
+Insights: Generated 200+ strong rules (confidence > 70%, lift > 1.5); “whole milk” emerged as a central hub item
+
+RevOps Relevance: Supports revenue growth via combo offers, increased basket size (AOV), and optimized GTM campaigns
 
 
 Customer LTV & Expense Forecasting (Python)
@@ -27,8 +33,13 @@ Customer LTV & Expense Forecasting (Python)
 
 
 
-### 📌 Sales Forecasting – Time Series Revenue Trends  
-Built models to project quarterly revenue based on trend and seasonality. Enhanced planning accuracy for RevOps and Sales Ops.
+###  [Sales Forecasting – Time Series Revenue Analysis (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Sales%20Forecasting)
+> *Week‑level forecasting of store revenue using ARIMA and ETS models — supports inventory planning (with 15% Q4 buffer), quota setting, and seasonal GTM mapping.*
+
+- Tools: Python (Statsmodels, pmdarima), ETS, ARIMA  
+- Metrics: MAE, MAPE (~3%), RMSE  
+- RevOps Relevance: Demand forecasting, GTM campaign planning, stock alignment
+
 
 ### 📌 Salary Prediction – HR Compensation Benchmarking  
 Created regression model using Python to predict salary based on education and experience. Informed equitable pay policy design.
