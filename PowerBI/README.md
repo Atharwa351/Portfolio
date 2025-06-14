@@ -1,11 +1,11 @@
-# 📊 TCS Price Movement Dashboard – Power BI RevOps Simulation
+#  TCS Price Movement Dashboard – Power BI RevOps Simulation
 
 **Objective**  
 Visualize and analyze TCS stock trends to simulate real-world Revenue Operations scenarios like forecasting pipeline movement, volume trends, and campaign timing using Power BI.
 
 ---
 
-## 🧠 Business Use Case
+##  Business Use Case
 
 This dashboard emulates how RevOps or Sales Strategy teams might track high-frequency financial or deal-level metrics to:
 
@@ -16,7 +16,7 @@ This dashboard emulates how RevOps or Sales Strategy teams might track high-freq
 
 ---
 
-## 🛠️ Tools & Techniques
+##  Tools & Techniques
 
 - **Tool**: Microsoft Power BI (Desktop)
 - **Data**: Historical stock price data from NSE – TCS Equity
@@ -33,7 +33,7 @@ This dashboard emulates how RevOps or Sales Strategy teams might track high-freq
 
 ---
 
-## 🔍 Visual Breakdown
+##  Visual Breakdown
 
 | Visual                        | Purpose                                                                 |
 |------------------------------|-------------------------------------------------------------------------|
@@ -46,14 +46,14 @@ This dashboard emulates how RevOps or Sales Strategy teams might track high-freq
 
 ---
 
-## 📈 Dashboard Preview
+##  Dashboard Preview
 
 > *(Add screenshot here once saved as PNG)*  
 > `./dashboard_preview.png`
 
 ---
 
-## 📁 Folder Contents
+##  Folder Contents
 
 | File Name                    | Description                                        |
 |-----------------------------|----------------------------------------------------|
@@ -64,12 +64,12 @@ This dashboard emulates how RevOps or Sales Strategy teams might track high-freq
 
 ---
 
-## 💡 RevOps Application
+##  RevOps Application
 
 “This dashboard is a blueprint for revenue teams to visualize historical trends, spot seasonality, and proactively align GTM actions with anticipated spikes or drops — be it in sales, renewals, or lead engagement.”
 
 ---
 
-## 🔗 Return to Portfolio
+##  Return to Portfolio
 
 [Back to Main Portfolio](https://github.com/Atharwa351/Portfolio)
