@@ -1,10 +1,10 @@
-# 📊 Portfolio – Atharwa Malawade
+#  Portfolio – Atharwa Malawade
 
 A business-first analytics portfolio applying R, Python, SQL, Excel, and Power BI to real-world challenges in **Revenue Operations**, **Sales Strategy**, and **GTM Analytics**.
 
 ---
 
-## 🔍 Featured Projects
+##  Featured Projects
 
 ### 📌 Conjoint Analysis – Laptop Buyer Preferences  
 Modeled product-market fit across 100+ buyer personas using R. Estimated marginal utilities to guide pricing and roadmap decisions.
@@ -12,8 +12,16 @@ Modeled product-market fit across 100+ buyer personas using R. Estimated margina
 ### 📌 Market Basket Analysis – Retail Cross-Sell Optimization  
 Applied Apriori algorithm in R to identify high-confidence item pairings. Informed promotional design to increase AOV and optimize shelf placement.
 
-### 📌 CLTV & Expense Prediction – Behavioral Segmentation  
-Segmented customers based on spend and retention patterns. Supported churn mitigation and personalized GTM outreach.
+
+Customer LTV & Expense Forecasting (Python)
+   Forecasts Customer Lifetime Value and monthly expenses from anonymized CRM-style data to support lead scoring, CAC reduction, and revenue planning in a RevOps context.
+   Modeled CLTV and expense behavior using linear regression
+   Identified value concentration in top 20% of customer base
+   Used Python (Pandas, Sklearn, Statsmodels) and Jupyter for visual insights
+   Delivered business-ready outputs: funnel skew detection, segment ROI analysis
+   Use Case: GTM team uses LTV scores to prioritize leads and plan outreach velocity
+
+
 
 ### 📌 Sales Forecasting – Time Series Revenue Trends  
 Built models to project quarterly revenue based on trend and seasonality. Enhanced planning accuracy for RevOps and Sales Ops.
