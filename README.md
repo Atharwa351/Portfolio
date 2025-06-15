@@ -115,6 +115,15 @@ Built a Power BI dashboard from real stock market data to simulate daily revenue
 
 ---
 
+###  [CRM Account Segmentation Dashboard – Tableau](https://github.com/Atharwa351/Portfolio/tree/main/Tableau)
+Simulates RevOps account segmentation using CRM-style data. Visualizes revenue by sector, geography, headcount, and subsidiary status to support account prioritization and GTM alignment.
+
+- **Tools**: Tableau, Excel  
+- **Insights**: Software, technology, and retail sectors lead in revenue; subsidiaries contribute ~18% of total revenue; high-revenue, lean-headcount accounts spotted  
+- **RevOps Application**: Account segmentation, pipeline planning, geo-sector prioritization, resource mapping
+
+---
+
 ##  Research & Strategy Projects
 
 ###  [Birla Opus – GTM Market Entry Strategy](https://github.com/Atharwa351/Portfolio/tree/main/Research%20Papers/Birla%20OPUS%20Market%20Research)
