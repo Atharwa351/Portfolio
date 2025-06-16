@@ -1,33 +1,84 @@
-# 🤖 Machine Learning – Lead Conversion Classifier
+Always show details
 
-## 🎯 Objective
-To predict whether a lead is likely to convert into a customer using historical CRM data. The model supports **sales prioritization** and **RevOps funnel optimization**.
+Copy
+# Rebuilding the README for the Time Series Forecasting project based on the CLTV format provided.
 
-## 🧠 Business Use Case
-- Prioritize high-likelihood MQLs
-- Improve SDR efficiency and pipeline quality
-- Embed predictive scores in CRM for smarter outreach
+readme_text = """
+# Time Series Forecasting – TCS Stock Price Simulation (ARIMA & Holt-Winters)
 
-## 🛠️ Tools & Techniques
-- **Language**: Python (scikit-learn, pandas, matplotlib)
-- **Models Used**: Logistic Regression, K-Nearest Neighbors (KNN)
-- **Evaluation Metrics**: Accuracy, Confusion Matrix, ROC Curve
+A GTM-aligned time series modeling project using ARIMA and Holt-Winters to simulate sales-like stock trends, aimed at enabling RevOps teams to forecast pipeline and seasonal revenue flows.
 
-## 📊 Key Visuals
-- `confusion_matrix.png`: Model performance visualization  
-- `model_accuracy.png`: Model comparison chart  
-- `roc_curve.png`: AUC analysis (optional)
+## Project Objective
 
-## ✅ Results
-- Achieved 83% accuracy with KNN (k=5)  
-- Confusion matrix: high true positive rate  
-- Recommending KNN as deployment candidate for CRM scoring  
+This project demonstrates how a Revenue Operations or GTM team can:
 
-## 📂 Files
-- `ml_model.ipynb` – Model training and evaluation
-- `leads_dataset.csv` – Sample anonymized lead data
-- `visuals/` – Confusion matrix, accuracy, and ROC plots
+- Forecast future performance using historical time series data
+- Compare forecasting models for accuracy and stability
+- Identify seasonal and trend-based shifts in revenue behavior
+- Improve planning for campaigns, renewals, and sales targeting
 
----
+## Business Use Case
 
-📁 [Back to Portfolio](https://github.com/Atharwa351/Portfolio)
+For RevOps teams, accurate forecasting of MRR or pipeline velocity is mission-critical. This project:
+
+- Simulates 30-day rolling forecasts of TCS stock data
+- Tests models for overfitting, accuracy, and volatility handling
+- Offers a strategic tool for quarterly planning or campaign timing
+- Helps identify which forecasting technique performs better under seasonal pressure
+
+## Tools & Techniques
+
+| Component        | Purpose                              |
+|------------------|--------------------------------------|
+| Python (Pandas, NumPy)  | Data cleaning, transformation   |
+| Statsmodels, pmdarima   | Time series modeling (ARIMA, Holt-Winters) |
+| Matplotlib, Seaborn     | Visualization and seasonal decomposition |
+| TimeSeriesSplit         | Rolling cross-validation |
+| Metrics: MSE, MAE, MAPE | Model evaluation and comparison |
+
+## Visual Outputs
+
+**Graphs/** folder includes:
+
+- **Seasonal Decomposition**
+  Identifies clear seasonality and trend signals in closing prices.
+  
+- **Forecast vs Actuals**
+  Visualizes model accuracy across 30-day windows.
+
+- **Error Analysis**
+  MAPE of ~3.8% on ARIMA suggests strong generalization.
+
+## Key Metrics Modeled
+
+- 30-day forecast for stock closing price
+- Multi-model comparison: Holt-Winters vs ARIMA
+- Evaluation using: MAPE, MAE, MSE, rolling splits
+
+## Strategic Insights
+
+- ARIMA models provided tighter forecasts (MAPE ≈ 3.8%)
+- Holt-Winters was more volatile in presence of sudden trends
+- Cross-validation helped identify model drift
+- Seasonal components suggest when GTM teams should avoid campaigns
+
+## Files
+
+| File                               | Description                            |
+|------------------------------------|----------------------------------------|
+| TCS_ARIMA_HoltWinters_Forecasting.ipynb | Full pipeline: preprocessing → model tuning → evaluation |
+| TCS.csv                            | Raw stock data                         |
+| Graphs/                            | Forecast and decomposition plots       |
+| README.md                          | This file                              |
+
+## RevOps Value Add
+
+This modeling pipeline can be used to:
+
+- Forecast MRR, renewals, or churn using historical GTM or revenue data
+- Schedule campaigns around seasonal demand spikes
+- Build sanity-checks into pipeline or ad-spend forecasting dashboards
+- Strengthen revenue planning with proven statistical methods
+
+🔗 [Back to Portfolio](https://github.com/Atharwa351/Portfolio)
+"""
