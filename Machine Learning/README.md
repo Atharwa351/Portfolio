@@ -1,9 +1,3 @@
-Always show details
-
-Copy
-# Rebuilding the README for the Time Series Forecasting project based on the CLTV format provided.
-
-readme_text = """
 # Time Series Forecasting – TCS Stock Price Simulation (ARIMA & Holt-Winters)
 
 A GTM-aligned time series modeling project using ARIMA and Holt-Winters to simulate sales-like stock trends, aimed at enabling RevOps teams to forecast pipeline and seasonal revenue flows.
