@@ -1,166 +1,203 @@
-#  Portfolio – Atharwa Malawade
+Atharwa Malawade – RevOps Analytics Portfolio
 
-A business-first analytics portfolio applying **Python, R, SQL, Power BI, Tableau, and Excel** to real-world challenges across **Revenue Operations**, **GTM Strategy**, and **Sales Enablement**.
+A business-first portfolio using Python, R, SQL, Power BI, Tableau, and Excel to solve real-world problems across:
 
->  From requalifying 250+ leads and driving $12.4K+ in B2B revenue at Globo Persona to modeling CLTV and sales forecasts, I use data to unlock GTM efficiency, conversion lift, and pipeline accuracy.
+Revenue Operations (RevOps)
 
----
+GTM Strategy
 
-##  Featured Projects
+Sales Enablement
 
-###  [Laptop Conjoint Analysis – GTM Feature Prioritization (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Laptop_Preference_Case_Study)
-Simulates product-market fit using choice-based conjoint modeling on self-collected data.
+Customer Segmentation
 
-- **Tools**: Python, Pandas, Scikit-learn  
-- **Insights**: RAM, price, screen size drove >70% preference utility  
-- **RevOps Use**: Tiered pricing, bundling, GTM configuration
+From requalifying 250+ leads and closing $12.4K+ in B2B revenue to building forecasting models and GTM dashboards — this portfolio combines technical execution with commercial intuition.
 
 ---
 
-###  [Market Basket Analysis – Retail GTM Optimization (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Market%20Basket%20Analysis')
-Used Apriori algorithm on transaction data to drive promo bundling strategy.
+ Featured Projects (Click to Explore)
 
-- **Tools**: R (arules, arulesViz)  
-- **Insights**: “Whole milk” = cross-sell anchor across 200+ rules  
-- **RevOps Use**: Campaign design, basket-size uplift, shelf layout
+Behavioral Modeling & Forecasting
 
----
+CLTV & Expense Forecasting – Behavioral Segmentation (Python)
 
-###  [CLTV & Expense Forecasting – Behavioral Segmentation (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/CLTV%20Analysis)
-Forecasts lifetime value + monthly spend using CRM-style data.
+Predicts lifetime value + monthly expense for CRM-style accounts.
 
-- **Tools**: Python (Pandas, Sklearn, Statsmodels)  
-- **Insights**: Top 20% accounts held 65% of predicted CLTV  
-- **RevOps Use**: Lead scoring, segment ROI, CAC reduction
+Tools: Python (Pandas, Statsmodels, Sklearn)
+
+Insights: Top 20% accounts = 65% of CLTV
+
+RevOps Use: Lead scoring, CAC optimization, segment targeting
 
 ---
 
-###  [Sales Forecasting – Weekly Store Revenue (Python)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Sales%20Forecasting)
-Forecasts weekly sales using time series models for GTM planning.
+Sales Forecasting – Weekly Revenue (Python)
 
-- **Tools**: Pandas, Statsmodels, pmdarima  
-- **Models**: Triple ES, ARIMA (MAPE ~2.8%)  
-- **RevOps Use**: Seasonality planning, Q4 buffer, campaign targeting
+Time series forecasting using ARIMA and Exponential Smoothing.
 
----
+Tools: Python, pmdarima, statsmodels
 
-###  [Salary Prediction – Placement Outcome Modeling](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Salary%20Prediction)
-Built regressors and classifiers to predict salary + placement status.
+Insights: MAPE ≈ 2.8%, flagged Q4 seasonality
 
-- **Tools**: Python, RandomForest, ElasticNet, LIME  
-- **Insights**: Specialization + workex best predicted salaries  
-- **RevOps Use**: Hiring ROI, training effectiveness, salary benchmarking
+RevOps Use: Pipeline planning, campaign cadence, revenue predictability
 
 ---
 
-###  [Admission Prediction – Application Scoring Simulation](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Admission%20Prediction)
-Simulated lead scoring using Random Forest + LIME.
+TCS Stock Price Forecasting – ARIMA & Holt-Winters
 
-- **Tools**: Python, GridSearchCV, LIME  
-- **Performance**: 82% accuracy with transparent logic  
-- **RevOps Use**: Lead qualification, pipeline scoring, intake optimization
+Simulated forecasting pipeline using ARIMA and Holt-Winters models.
 
----
+Tools: Python, statsmodels, matplotlib
 
-###  [Gradient Descent – Manual Linear Optimization](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Gradient%20Descent)
-Manually coded gradient descent to simulate revenue growth trends.
+RevOps Use: Revenue simulation, renewal timing, scenario planning
 
-- **Tools**: NumPy, statsmodels  
-- **Validation**: R² = 0.88 vs OLS  
-- **RevOps Use**: Lightweight forecasting in early-stage GTM stacks
+Market & Customer Intelligence
 
 ---
 
-###  [Customer Intent Classification – MNIST Digit Recognition](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/MNIST%20Classification)
-Digit classifier simulating CRM OCR or ticket routing.
+Laptop Conjoint Analysis – GTM Feature Prioritization (Python)
 
-- **Tools**: TensorFlow, Keras  
-- **Accuracy**: 97.5%  
-- **RevOps Use**: Form parsing, intent detection, support routing
+Simulated product-market fit via choice-based conjoint modeling.
 
----
+Tools: Python, Pandas, Sklearn
 
-###  [Revenue Forecasting – Neural Net w/ Backpropagation](https://github.com/Atharwa351/Portfolio/tree/main/Machine%20Learning/Back%20Propogation)
-Simulated revenue predictions using custom Keras-based MLP.
+Insights: RAM + price = >70% preference
 
-- **Tools**: Keras, TensorFlow  
-- **Output**: Predicts y = 24.46 @ x = 15  
-- **RevOps Use**: Forecasting velocity, lead scoring, revenue projection
+RevOps Use: Tiered pricing, SKU bundling, product-market config
 
 ---
 
-###  [Academic CBC Conjoint Analysis (R)](https://github.com/Atharwa351/Portfolio/tree/main/Financial%20Modelling/Conjoint%20Analysis/Academic_CBC_Project)
-Used R’s conjoint package on academic survey data to model utility.
+Market Basket Analysis – Retail Promo Strategy (R)
 
-- **Tools**: R (conjoint, MASS, ggplot2)  
-- **Insights**: Speed = top utility (68%), price = secondary  
-- **RevOps Use**: SKU feature config, new product modeling
+Used Apriori algorithm to identify cross-sell rules from retail data.
 
----
+Tools: R (arules, arulesViz)
 
-##  BI Dashboards
+Insights: 200+ rules; "whole milk" = top anchor item
 
-###  [TCS Price Movement Dashboard – Power BI](https://github.com/Atharwa351/Portfolio/tree/main/PowerBI)
-Built a stock data simulation for GTM timing & volatility awareness.
-
-- **Tools**: Power BI, Excel, DAX  
-- **Insights**: Trend anomalies, Q4 spikes, SMA overlays  
-- **RevOps Use**: Campaign cadence tuning, forecast sanity checks
+RevOps Use: Upsell triggers, bundling, shelf strategy
 
 ---
 
-###  [CRM Account Segmentation – Tableau](https://github.com/Atharwa351/Portfolio/tree/main/Tableau)
-Segmented 20+ CRM-style accounts by revenue, geography, and sector.
+BI Dashboards
 
-- **Tools**: Tableau  
-- **Insights**: Subsidiaries = 18% revenue; retail + tech = high-ROI  
-- **RevOps Use**: Prioritization planning, geo-sector targeting
+CRM Account Segmentation – Tableau
 
----
+Segmented accounts by revenue, sector, geo, and parent company.
 
-##  Strategy & Research
+Tools: Tableau
 
-###  [Birla Opus GTM Strategy](https://github.com/Atharwa351/Portfolio/tree/main/Research%20Papers/Birla%20OPUS%20Market%20Research)  
-Paint sector market entry plan using SWOT & Porter’s Five Forces.
+Insights: Subsidiaries = 18% revenue, Tech + Retail = high-ROI
 
-###  [Street Vendor Impact Study](https://github.com/Atharwa351/Portfolio/tree/main/Research%20Papers/Effects%20of%20Traffic%20on%20Street%20Vendors)  
-Urban policy paper on congestion’s impact on informal economy.
+RevOps Use: Account prioritization, GTM targeting, ABM planning
 
 ---
 
-##  Certifications
+Stock Volatility Dashboard – Power BI
 
-[▶ Certifications Folder](https://github.com/Atharwa351/Portfolio/tree/main/Certification)
- 
-- **Data Governance – Coursera (Sep 2024)**
-- **Globo Persona - Internship Completion Certificate**
-- **Manthan 2024 - Participation Certificate**
-- **Power BI – Practical Guide (Expeted - Jul 2025)**  
-- **SQL for Data Analysis – Codecademy (Expected - Jul 2025)**
-  
----
+Visualized daily price movement and anomalies in stock data.
 
-##  About Me
+Tools: Power BI, DAX, Excel
 
-- 📍 Bengaluru, India  
-- 🎓 MBA in Data Analytics – Garden City University  
-- 💬 Past Roles: BDE @ Globo Persona | Byju’s  
-- 🧠 GTM + Funnel Optimization | Revenue Intelligence | Lead Scoring  
-- 📈 Targeting RevOps Analyst / GTM Insights / BizOps roles
+Insights: Trend anomalies + Q4 spikes
+
+RevOps Use: GTM timing validation, campaign stress testing
 
 ---
 
-##  Stack & Capabilities
+Machine Learning & Simulation Projects
 
-**Languages**: Python, R, SQL  
-**BI & Viz**: Power BI, Tableau, Excel  
-**Modeling**: Forecasting, Segmentation, Classification, Conjoint  
-**Frameworks**: GTM Design, SWOT, Porter’s 5 Forces  
-**Tools**: Scikit-learn, Statsmodels, pmdarima, LIME, Keras, DAX  
+Salary Prediction – Placement Modeling (Python)
+
+Used regression + classification to model placement outcomes.
+
+Tools: Python, ElasticNet, RF, LIME
+
+RevOps Use: Hiring ROI, training impact, compensation targeting
 
 ---
 
-##  Let’s Connect
+Admission Prediction – Lead Scoring Simulation
 
-- [🔗 LinkedIn – Atharwa Malawade](https://www.linkedin.com/in/atharwa-malawade-916618222/)
-- [🔗 GitHub – @Atharwa351](https://github.com/Atharwa351/Portfolio)
+Simulated lead scoring logic using Random Forest + LIME.
+
+Accuracy: 82%
+
+RevOps Use: CRM scoring, pipeline quality, intake filtering
+
+---
+
+Gradient Descent – Manual Regression
+
+Manual optimization to simulate linear trend forecasting.
+
+RevOps Use: Lightweight prediction modeling
+
+---
+
+MNIST Classifier – Intent Routing
+
+Built digit classifier for OCR-type classification.
+
+Accuracy: 97.5%
+
+RevOps Use: Form processing, CRM automation
+
+---
+
+Neural Net Forecasting – Revenue Simulation
+
+Built MLP neural net to simulate revenue forecasting.
+
+Tools: Keras, TensorFlow
+
+RevOps Use: Dynamic revenue prediction
+
+---
+
+Strategy & Research
+
+Birla Paints – GTM Strategy Whitepaper
+
+Market entry plan using SWOT + Porter’s 5 Forces.
+
+---
+
+Street Vendor Policy – Urban GTM Study
+
+Field interviews + traffic impact analysis on informal retail GTM.
+
+---
+
+Certifications
+
+View All Certificates
+
+SQL for Data Analysis – Codecademy (Expected: Jul 2025)
+
+Power BI – Practical Guide (Expected: Jul 2025)
+
+Data Governance – Coursera (Sep 2024)
+
+Globo Persona Internship Certificate
+
+---
+
+About Me
+
+MBA – Data Analytics @ Garden City University
+
+BDE @ Globo Persona | Ex-BYJU’S
+
+Stack: Python, R, SQL, Power BI, Tableau
+
+Focus: RevOps Analytics | GTM Intelligence | Funnel Transparency
+
+LinkedIn | Resume
+
+Let’s Talk
+
+If you’re building smarter revenue engines, I’d love to contribute.
+
+Drop a message on LinkedIn
+
+© 2025 Atharwa Malawade | Bengaluru, India
