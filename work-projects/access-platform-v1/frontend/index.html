@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Apollo Database - Optimized for 40M Records</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #4b6cb7;
+            --secondary-color: #667eea;
+            --dark-bg: #1e1e2f;
+            --dark-secondary: #2b2b3a;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --error-color: #dc3545;
+            --text-light: #f8f9fa;
+            --text-dark: #333;
+            --border-radius: 8px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+        #filters { width: 350px; background: var(--dark-bg); color: #fff; padding: 20px; overflow-y: auto; border-right: 2px solid #333; transition: transform 0.3s ease; }
+        #filters.collapsed { transform: translateX(-100%); }
+        #filters h2 { text-align: center; margin-bottom: 20px; font-size: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 12px; }
+        .filter-section { margin-bottom: 25px; position: relative; }
+        .filter-section.hidden { display: none; }
+        .filter-section label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 14px; color: #e0e0e0; cursor: pointer; }
+        .filter-select { width: 100%; padding: 12px; border-radius: var(--border-radius); border: 1px solid #444; background: var(--dark-secondary); color: #fff; font-size: 14px; cursor: pointer; }
+        .filter-dropdown { position: absolute; top: 100%; left: 0; right: 0; background: var(--dark-secondary); border: 1px solid #444; border-radius: var(--border-radius); margin-top: 5px; z-index: 1000; display: none; max-height: 400px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .filter-dropdown.open { display: block; }
+        .filter-search-container { padding: 12px; border-bottom: 1px solid #444; }
+        .filter-search { width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #555; background: var(--dark-bg); color: #fff; font-size: 14px; }
+        .filter-options { max-height: 350px; overflow-y: auto; }
+        .filter-option { padding: 12px 15px; cursor: pointer; transition: background 0.2s; border-bottom: 1px solid #333; font-size: 14px; display: flex; align-items: center; }
+        .filter-option:hover { background: #3a3a4a; }
+        .filter-option.selected { background: var(--primary-color); }
+        .filter-option input[type="checkbox"] { margin-right: 10px; }
+        .selected-count { font-size: 12px; color: #888; margin-top: 8px; text-align: right; }
+        .selected-filters { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .filter-bubble { background: var(--primary-color); color: white; padding: 6px 12px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+        .filter-bubble .remove { cursor: pointer; font-weight: bold; }
+        button { width: 100%; padding: 14px; margin-bottom: 12px; border: none; border-radius: var(--border-radius); cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        #resetFilters { background: #6c757d; color: #fff; }
+        #resetFilters:hover:not(:disabled) { background: #5a6268; }
+        #refreshData { background: var(--success-color); color: #fff; }
+        #refreshData:hover:not(:disabled) { background: #218838; }
+        #downloadCsv, #downloadExcel { background: #17a2b8; color: #fff; }
+        #downloadCsv:hover:not(:disabled), #downloadExcel:hover:not(:disabled) { background: #138496; }
+        #performanceBtn { background: #6f42c1; color: #fff; }
+        #performanceBtn:hover:not(:disabled) { background: #5a2d91; }
+        #content { flex: 1; padding: 25px; overflow: auto; transition: margin-left 0.3s ease; }
+        .dashboard-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 25px; margin: -25px -25px 25px -25px; border-radius: 0 0 12px 12px; display: flex; justify-content: space-between; align-items: center; }
+        .dashboard-header h1 { margin: 0; font-size: 28px; }
+        .mobile-toggle { display: none; background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+        .stats { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:15px; }
+        .stat-item { text-align:center; padding:15px; background: #f8f9fa; border-radius:10px; }
+        .stat-value { font-size:24px; font-weight:800; color: var(--primary-color); margin-bottom:5px; }
+        .stat-label { font-size:13px; color:#666; font-weight:600; }
+        table { width:100%; border-collapse: collapse; background: #fff; border-radius:12px; overflow: hidden; margin-bottom:25px; }
+        th, td { padding:15px; text-align:left; border-bottom:1px solid #eee; }
+        th { background: var(--primary-color); color: #fff; font-weight:700; font-size:14px; }
+        tr:nth-child(even) { background:#f8f9fa; }
+        tr:hover { background: #e6f0ff; }
+        #pagination { margin-top:25px; text-align:center; }
+        .pagination-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .pagination-info { text-align: center; margin-bottom: 15px; color: #666; font-size: 14px; }
+        #pagination button { width:auto; margin:0; padding:10px 16px; background:#fff; color:#495057; border:1px solid #dee2e6; }
+        #pagination button.active { background:var(--primary-color); color:#fff; }
+        #pagination button:hover:not(.active) { background:#e9ecef; }
+        .status-message { font-size:13px; margin:15px 0; padding:12px; border-radius: var(--border-radius); text-align:center; display:none; }
+        .error-message { background: #ff6b6b20; color: #ff6b6b; border-left: 4px solid #ff6b6b; }
+        .success-message { background: #4ade8020; color: #4ade80; border-left: 4px solid #4ade80; }
+        .info-message { background: #3b82f620; color: #3b82f6; border-left: 4px solid #3b82f6; }
+        .warning-message { background: #ffc10720; color: #ffc107; border-left: 4px solid #ffc107; }
+        .loading { display:inline-block; width:16px; height:16px; border:2px solid #f3f3f3; border-top:2px solid var(--primary-color); border-radius:50%; animation: spin 1s linear infinite; margin-right:8px; }
+        @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+        .export-progress { background: var(--dark-bg); padding:15px; border-radius: var(--border-radius); margin:10px 0; display:none; }
+        .progress-bar { height:6px; background:#333; border-radius:3px; overflow:hidden; margin:8px 0; }
+        .progress-fill { height:100%; background:var(--primary-color); width:0%; transition: width 0.3s ease; }
+        .table-loading { text-align:center; padding:40px; color:#666; }
+        .filter-loading { padding:15px; text-align:center; color:#888; font-size:12px; }
+        .filter-loading.large-dataset { background: rgba(255, 193, 7, 0.1); border-left: 3px solid #ffc107; }
+        .error-boundary { background: #ff6b6b10; border:1px solid #ff6b6b30; border-radius: var(--border-radius); padding:20px; margin:20px 0; text-align:center; }
+        .performance-panel { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #6f42c1; }
+        .performance-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .metric { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .metric-value { font-size: 18px; font-weight: 700; color: #6f42c1; }
+        .metric-label { font-size: 12px; color: #666; margin-top: 5px; }
+        
+        /* API Status Indicator */
+        .api-status { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding: 12px; background: var(--dark-secondary); border-radius: var(--border-radius); border-left: 4px solid #6c757d; }
+        .status-indicator { width: 16px; height: 16px; border-radius: 50%; background: #6c757d; transition: all 0.3s ease; }
+        .status-indicator.connected { background: #28a745; box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
+        .status-indicator.disconnected { background: #dc3545; box-shadow: 0 0 10px rgba(220, 53, 69, 0.5); }
+        .status-indicator.connecting { background: #ffc107; box-shadow: 0 0 10px rgba(255, 193, 7, 0.5); animation: pulse 1.5s infinite; }
+        .status-text { font-size: 14px; color: #e0e0e0; font-weight: 600; }
+        .status-details { font-size: 12px; color: #888; margin-top: 2px; }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width:1024px) { #filters { width:300px; } }
+        @media (max-width:768px) {
+            body { flex-direction:column; height:auto; overflow:auto; }
+            #filters { width:100%; position:fixed; top:0; left:0; height:100%; z-index:1000; transform: translateX(-100%); }
+            #filters.open { transform: translateX(0); }
+            #content { margin-left:0; padding-top:70px; }
+            .dashboard-header { position:fixed; top:0; left:0; right:0; z-index:900; margin:0; border-radius:0; }
+            .mobile-toggle { display:block; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width:480px) {
+            .stats { grid-template-columns:1fr; }
+            .pagination-container { flex-wrap:wrap; }
+            #pagination button { padding:8px 12px; font-size:12px; }
+        }
+        button:focus, .filter-select:focus, .filter-search:focus { outline:2px solid var(--primary-color); outline-offset:2px; }
+    </style>
+</head>
+<body>
+    <!-- Filters Sidebar -->
+    <div id="filters">
+        <h2>Apollo Database</h2>
+        <div class="api-status">
+            <div class="status-indicator" id="apiStatusIndicator"></div>
+            <div>
+                <div class="status-text" id="apiStatusText">Connecting to Server</div>
+                <div class="status-details" id="apiStatusDetails">Checking connection...</div>
+            </div>
+        </div>
+
+        <div id="filterStatus" class="status-message" role="alert" aria-live="polite" style="display:none;"></div>
+
+        <!-- Performance Warning -->
+        <div class="status-message warning-message" id="performanceWarning" style="display:none;">
+            <strong>40M Records Mode:</strong> Use specific filters for better performance
+        </div>
+
+        <!-- Export Progress -->
+        <div id="exportProgress" class="export-progress">
+            <div style="font-size: 12px; color: #fff;">Exporting data...</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div style="font-size: 11px; color: #888; text-align: center;" id="progressText">Preparing...</div>
+        </div>
+
+        <!-- Industry Filter -->
+        <div class="filter-section">
+            <label>Industry</label>
+            <div class="filter-select" id="industrySelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select Industries</div>
+            <input type="hidden" id="industry" value="">
+            <div class="filter-dropdown" id="industryDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search industries..." id="industrySearch" aria-label="Search industries">
+                </div>
+                <div class="filter-options" id="industryOptions"></div>
+            </div>
+            <div class="selected-count" id="industry_count">0 selected</div>
+            <div class="selected-filters" id="industryBubbles"></div>
+        </div>
+
+        <!-- Sub Industry Filter -->
+        <div class="filter-section" id="subIndustrySection">
+            <label>Sub Industry</label>
+            <div class="filter-select" id="subIndustrySelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select Sub Industries</div>
+            <input type="hidden" id="sub_industry" value="">
+            <div class="filter-dropdown" id="subIndustryDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search sub industries..." id="subIndustrySearch" aria-label="Search sub industries">
+                </div>
+                <div class="filter-options" id="subIndustryOptions"></div>
+            </div>
+            <div class="selected-count" id="sub_industry_count">0 selected</div>
+            <div class="selected-filters" id="sub_industryBubbles"></div>
+        </div>
+
+        <!-- Job Title Filter -->
+        <div class="filter-section">
+            <label>Job Title</label>
+            <div class="filter-select" id="jobTitleSelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select Job Titles</div>
+            <input type="hidden" id="job_title" value="">
+            <div class="filter-dropdown" id="jobTitleDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search job titles..." id="jobTitleSearch" aria-label="Search job titles">
+                </div>
+                <div class="filter-options" id="jobTitleOptions"></div>
+            </div>
+            <div class="selected-count" id="job_title_count">0 selected</div>
+            <div class="selected-filters" id="job_titleBubbles"></div>
+        </div>
+
+        <!-- Sub Role Filter -->
+        <div class="filter-section" id="subRoleSection">
+            <label>Sub Role / Position</label>
+            <div class="filter-select" id="subRoleSelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select Sub Roles</div>
+            <input type="hidden" id="sub_role" value="">
+            <div class="filter-dropdown" id="subRoleDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search sub roles..." id="subRoleSearch" aria-label="Search sub roles">
+                </div>
+                <div class="filter-options" id="subRoleOptions"></div>
+            </div>
+            <div class="selected-count" id="sub_role_count">0 selected</div>
+            <div class="selected-filters" id="sub_roleBubbles"></div>
+        </div>
+
+        <!-- Metro Filter -->
+        <div class="filter-section" id="metroSection">
+            <label>Metro</label>
+            <div class="filter-select" id="metroSelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select Metros</div>
+            <input type="hidden" id="metro" value="">
+            <div class="filter-dropdown" id="metroDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search metros..." id="metroSearch" aria-label="Search metros">
+                </div>
+                <div class="filter-options" id="metroOptions"></div>
+            </div>
+            <div class="selected-count" id="metro_count">0 selected</div>
+            <div class="selected-filters" id="metroBubbles"></div>
+        </div>
+
+        <!-- Region Filter -->
+        <div class="filter-section">
+            <label>US State</label>
+            <div class="filter-select" id="regionSelect" role="button" aria-haspopup="listbox" aria-expanded="false">Select US States</div>
+            <input type="hidden" id="region" value="">
+            <div class="filter-dropdown" id="regionDropdown" role="listbox">
+                <div class="filter-search-container">
+                    <input type="text" class="filter-search" placeholder="Search US states..." id="regionSearch" aria-label="Search US states">
+                </div>
+                <div class="filter-options" id="regionOptions"></div>
+            </div>
+            <div class="selected-count" id="region_count">0 selected</div>
+            <div class="selected-filters" id="regionBubbles"></div>
+        </div>
+
+        <button id="resetFilters">Reset All Filters</button>
+        <button id="refreshData">Refresh Data</button>
+        <button id="performanceBtn">Performance Info</button>
+        <button id="downloadCsv">Export CSV</button>
+        <button id="downloadExcel">Export Excel</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <div class="dashboard-header">
+            <h1>Apollo Database Dashboard</h1>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle filters">Filters</button>
+            </div>
+        </div>
+
+        <!-- Performance Panel -->
+        <div id="performancePanel" class="performance-panel" style="display:none;">
+            <h3>🚀 Performance Optimizations</h3>
+            <div class="performance-metrics" id="performanceMetrics">
+                <div class="metric">
+                    <div class="metric-value" id="memoryUsage">-</div>
+                    <div class="metric-label">Memory Usage</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="queryTimeout">30s</div>
+                    <div class="metric-label">Query Timeout</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="streamingEnabled">Yes</div>
+                    <div class="metric-label">Streaming Exports</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value" id="optimizedFor">40M</div>
+                    <div class="metric-label">Records Optimized</div>
+                </div>
+            </div>
+            <div style="margin-top: 15px; font-size: 13px; color: #666;">
+                <strong>Tips for 40M records:</strong> Use specific filters, avoid broad searches, export in batches
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item"><div class="stat-value" id="totalContacts">0</div><div class="stat-label">Total Contacts</div></div>
+            <div class="stat-item"><div class="stat-value" id="currentPage">1</div><div class="stat-label">Current Page</div></div>
+            <div class="stat-item"><div class="stat-value" id="displayedRecords">0</div><div class="stat-label">Displayed Records</div></div>
+            <div class="stat-item"><div class="stat-value" id="totalPages">1</div><div class="stat-label">Total Pages</div></div>
+        </div>
+
+        <div id="errorBoundary" style="display:none;" class="error-boundary" role="alert">
+            <h3>Something went wrong</h3>
+            <p>We encountered an error while loading the data. Please try refreshing the page.</p>
+            <button id="recoverError" style="width:auto; margin-top:10px;">Retry</button>
+        </div>
+
+        <table id="dataTable" aria-label="Apollo Database contacts data table">
+            <thead><tr id="tableHeader"></tr></thead>
+            <tbody id="tableBody">
+                <tr><td colspan="10" style="text-align:center; padding:40px; color:#666;">
+                    <div>Loading Apollo Database...</div>
+                    <div style="font-size:14px; color:#888;" id="loadingMessage">Initializing optimized connection</div>
+                </td></tr>
+            </tbody>
+        </table>
+        
+        <div id="pagination" role="navigation" aria-label="Pagination"></div>
+    </div>
+
+    <script>
+        // CONFIG: API_URL (backend base URL)
+        const API_URL = "http://localhost:4002";
+
+        // STATE
+        let currentPage = 1;
+        const limit = 50;
+        let totalPages = 1;
+        let openDropdown = null;
+        let searchTimeouts = {};
+        let selectedFilters = { industry: [], sub_industry: [], job_title: [], sub_role: [], metro: [], region: [] };
+        let loadDataTimeout = null;
+        let isExporting = false;
+        let requestController = null;
+        let totalFilteredRecords = 0;
+        let hasSubRoleData = false;
+        let hasMetroData = false;
+        let performanceData = {};
+
+        // DOM ready
+        $(document).ready(() => {
+            console.log("🚀 Apollo Database Frontend - OPTIMIZED FOR 40M RECORDS");
+            setupDropdowns();
+            setupEventListeners();
+            checkHealth();
+            loadInitialFilterOptions();
+            loadData();
+            
+            // Show performance warning
+            $('#performanceWarning').show();
+        });
+
+        /* ---------- Utilities ---------- */
+        function updateStatus(message, type='info') {
+            const status = $('#filterStatus');
+            status.removeClass('error-message success-message info-message warning-message');
+            switch(type) {
+                case 'error': status.addClass('error-message'); break;
+                case 'success': status.addClass('success-message'); break;
+                case 'warning': status.addClass('warning-message'); break;
+                default: status.addClass('info-message');
+            }
+            status.text(message);
+            status.show();
+            if (type === 'success' || type === 'info') {
+                setTimeout(() => {
+                    if (status.text() === message) {
+                        status.hide();
+                        status.text('');
+                    }
+                }, 4500);
+            }
+        }
+
+        function showExportProgress() {
+            $('#exportProgress').show();
+            $('#progressFill').css('width', '0%');
+            $('#progressText').text('Starting export...');
+        }
+        
+        function hideExportProgress() { 
+            $('#exportProgress').hide(); 
+            $('#progressFill').css('width','0%'); 
+            $('#progressText').text(''); 
+        }
+
+        function escapeAttr(s) {
+            return String(s).replace(/"/g, '&quot;').replace(/&/g, '&amp;');
+        }
+
+        /* ---------- Performance Monitoring ---------- */
+        async function checkPerformance() {
+            try {
+                const res = await fetch(`${API_URL}/performance`);
+                const data = await res.json();
+                if (data.success) {
+                    performanceData = data;
+                    updatePerformancePanel();
+                }
+            } catch (err) {
+                console.error('Performance check error:', err);
+            }
+        }
+
+        function updatePerformancePanel() {
+            $('#performancePanel').show();
+            if (performanceData.memory) {
+                $('#memoryUsage').text(performanceData.memory.heapUsed);
+            }
+        }
+
+        /* ---------- HEALTH ---------- */
+        async function checkHealth() {
+            try {
+                setApiStatus('connecting', 'Connecting to Server', 'Checking API health...');
+                
+                const res = await fetch(`${API_URL}/health`);
+                const data = await res.json();
+                if (data.success) {
+                    setApiStatus('connected', 'Connected', 'API is responding normally');
+                    updateStatus('Apollo Database connected successfully - Optimized for 40M records', 'success');
+                    
+                    // Update stats
+                    if (data.stats) {
+                        $('#totalContacts').text(Number(data.stats.total_records).toLocaleString());
+                    }
+                    
+                    // Update performance data
+                    performanceData = data;
+                    updatePerformancePanel();
+                    
+                    // Filter availability
+                    hasSubRoleData = data.sub_role_available || false;
+                    hasMetroData = data.metro_available || false;
+                    
+                    console.log('🔍 Filter availability:', {
+                        sub_role: hasSubRoleData,
+                        metro: hasMetroData,
+                        optimizations: data.optimizations
+                    });
+                    
+                    // Show/hide sections based on availability
+                    if (!hasSubRoleData) {
+                        $('#subRoleSection').addClass('hidden');
+                    } else {
+                        $('#subRoleSection').removeClass('hidden');
+                    }
+
+                    if (!hasMetroData) {
+                        $('#metroSection').addClass('hidden');
+                    } else {
+                        $('#metroSection').removeClass('hidden');
+                    }
+                    
+                    $('#loadingMessage').text('Loading optimized data...');
+                    
+                } else {
+                    setApiStatus('disconnected', 'Disconnected', 'API returned error response');
+                    updateStatus('API not responding properly', 'error');
+                    $('#loadingMessage').text('Server error - check backend');
+                }
+            } catch(e) {
+                setApiStatus('disconnected', 'Disconnected', 'Cannot connect to server');
+                updateStatus('Cannot connect to server - make sure backend is running on port 4002', 'error');
+                $('#loadingMessage').text('Connection failed - start backend server');
+                console.error("Health check failed:", e);
+            }
+        }
+
+        function setApiStatus(status, text, details) {
+            const indicator = $('#apiStatusIndicator');
+            const statusText = $('#apiStatusText');
+            const statusDetails = $('#apiStatusDetails');
+            
+            indicator.removeClass('connected disconnected connecting');
+            statusText.text(text);
+            statusDetails.text(details);
+            
+            switch(status) {
+                case 'connected':
+                    indicator.addClass('connected');
+                    break;
+                case 'disconnected':
+                    indicator.addClass('disconnected');
+                    break;
+                case 'connecting':
+                    indicator.addClass('connecting');
+                    break;
+            }
+        }
+
+        /* ---------- OPTIMIZED FILTERS ---------- */
+        async function searchFilterOptions(filterType, query = '', page = 1) {
+            if (searchTimeouts[filterType]) {
+                clearTimeout(searchTimeouts[filterType]);
+                delete searchTimeouts[filterType];
+            }
+
+            // Skip sub_role if not available
+            if (filterType === 'sub_role' && !hasSubRoleData) {
+                const optionsContainer = $(`#subRoleOptions`);
+                optionsContainer.html('<div class="filter-loading">Sub Role data not available</div>');
+                return;
+            }
+
+            // Skip metro if not available
+            if (filterType === 'metro' && !hasMetroData) {
+                const optionsContainer = $(`#metroOptions`);
+                optionsContainer.html('<div class="filter-loading">Metro data not available</div>');
+                return;
+            }
+
+            searchTimeouts[filterType] = setTimeout(async () => {
+                try {
+                    const optionsIdMap = {
+                        'industry': 'industryOptions',
+                        'sub_industry': 'subIndustryOptions',
+                        'job_title': 'jobTitleOptions',
+                        'sub_role': 'subRoleOptions',
+                        'metro': 'metroOptions',
+                        'region': 'regionOptions'
+                    };
+                    const optionsId = optionsIdMap[filterType];
+                    const optionsContainer = $(`#${optionsId}`);
+                    
+                    if (page === 1) {
+                        optionsContainer.html('<div class="filter-loading large-dataset">⏳ Searching optimized data...</div>');
+                    }
+
+                    const params = new URLSearchParams({ 
+                        type: filterType, 
+                        query: query, 
+                        limit: 100,
+                        page: page 
+                    });
+                    
+                    const res = await fetch(`${API_URL}/filters/search?${params}`);
+                    
+                    if (!res.ok) {
+                        if (res.status === 408) {
+                            throw new Error('Search timeout - try a more specific term');
+                        }
+                        throw new Error(`HTTP ${res.status}`);
+                    }
+                    
+                    const data = await res.json();
+                    
+                    if (data.success) {
+                        console.log(`✅ Received ${data.data.items?.length || 0} ${filterType} options (page ${page})`);
+                        renderFilterOptions(filterType, data.data.items || [], page, data.data.has_more);
+                    } else {
+                        throw new Error(data.error || 'Search failed');
+                    }
+                } catch (err) {
+                    console.error('searchFilterOptions error', err);
+                    const map = { 
+                        'industry':'industryOptions',
+                        'sub_industry':'subIndustryOptions',
+                        'job_title':'jobTitleOptions',
+                        'sub_role':'subRoleOptions',
+                        'metro':'metroOptions',
+                        'region':'regionOptions' 
+                    };
+                    $(`#${map[filterType]}`).html('<div class="filter-loading" style="color: var(--error-color);">Search error: ' + err.message + '</div>');
+                }
+            }, 400); // Increased timeout for better performance
+        }
+
+        function renderFilterOptions(filterType, options, page, hasMore = false) {
+            const optionsIdMap = {
+                'industry': 'industryOptions',
+                'sub_industry': 'subIndustryOptions',
+                'job_title': 'jobTitleOptions',
+                'sub_role': 'subRoleOptions',
+                'metro': 'metroOptions',
+                'region': 'regionOptions'
+            };
+            const optionsId = optionsIdMap[filterType];
+            const optionsContainer = $(`#${optionsId}`);
+            if (page === 1) optionsContainer.empty();
+            else optionsContainer.find('.filter-loading').remove();
+
+            if (!options || options.length === 0) {
+                if (page === 1) {
+                    let message = 'No matches found';
+                    if (filterType === 'sub_role' && !hasSubRoleData) {
+                        message = 'Sub Role data not available';
+                    } else if (filterType === 'metro' && !hasMetroData) {
+                        message = 'Metro data not available';
+                    }
+                    optionsContainer.append(`<div class="filter-loading">${message}</div>`);
+                }
+                return;
+            }
+
+            console.log(`🎨 Rendering ${options.length} ${filterType} options`);
+
+            options.forEach(item => {
+                if (!item && item !== 0) return;
+                const displayText = String(item).length > 50 ? String(item).substring(0,47) + '...' : String(item);
+                const isSelected = selectedFilters[filterType] && selectedFilters[filterType].indexOf(String(item)) !== -1;
+                const dataValue = escapeAttr(String(item));
+                
+                const $option = $(`
+                    <div class="filter-option ${isSelected ? 'selected' : ''}" data-value="${dataValue}" role="option" aria-selected="${isSelected ? 'true' : 'false'}">
+                        <input type="checkbox" ${isSelected ? 'checked' : ''} aria-hidden="true">
+                        <span class="filter-option-text">${escapeAttr(displayText)}</span>
+                    </div>
+                `);
+                
+                $option.on('click', function(e) {
+                    e.stopPropagation();
+                    toggleFilterOption(filterType, $(this), String(item));
+                });
+                optionsContainer.append($option);
+            });
+
+            // Add load more button if there are more results
+            if (hasMore && page === 1) {
+                const $loadMore = $(`
+                    <div class="filter-option" style="justify-content: center; font-style: italic; color: #888;">
+                        More results available - refine your search
+                    </div>
+                `);
+                optionsContainer.append($loadMore);
+            }
+        }
+
+        /* ---------- TOGGLE / SELECT / BUBBLES ---------- */
+        function toggleFilterOption(filterType, $element, value) {
+            const $checkbox = $element.find('input[type="checkbox"]');
+            const wasChecked = !!$checkbox.prop('checked');
+
+            if (wasChecked) {
+                selectedFilters[filterType] = (selectedFilters[filterType] || []).filter(v => v !== value);
+                $checkbox.prop('checked', false);
+                $element.removeClass('selected').attr('aria-selected', 'false');
+            } else {
+                selectedFilters[filterType] = selectedFilters[filterType] || [];
+                if (selectedFilters[filterType].indexOf(value) === -1) selectedFilters[filterType].push(value);
+                $checkbox.prop('checked', true);
+                $element.addClass('selected').attr('aria-selected', 'true');
+            }
+
+            updateFilterBubbles(filterType);
+            updateHiddenField(filterType);
+            updateFilterSelectText(filterType);
+            triggerAutoUpdate();
+        }
+
+        function updateFilterBubbles(filterType) {
+            const container = $(`#${filterType}Bubbles`);
+            container.empty();
+            const values = selectedFilters[filterType] || [];
+            
+            if (!values || values.length === 0) {
+                $(`#${filterType}_count`).text('0 selected');
+                return;
+            }
+            
+            values.slice(0,8).forEach(val => {
+                const display = String(val).length > 25 ? String(val).substring(0,22) + '...' : String(val);
+                const $b = $(`<div class="filter-bubble" role="button" tabindex="0">${escapeAttr(display)}<span class="remove" data-value="${escapeAttr(String(val))}">×</span></div>`);
+                $b.on('click', function(e) {
+                    e.stopPropagation();
+                    removeFilterValue(filterType, val);
+                });
+                container.append($b);
+            });
+            
+            if (values.length > 8) {
+                const extra = values.length - 8;
+                container.append(`<div class="filter-bubble">+${extra} more</div>`);
+            }
+            $(`#${filterType}_count`).text(`${values.length} selected`);
+        }
+
+        function removeFilterValue(filterType, value) {
+            selectedFilters[filterType] = (selectedFilters[filterType] || []).filter(v => v !== value);
+            updateFilterBubbles(filterType);
+            updateHiddenField(filterType);
+            updateFilterSelectText(filterType);
+            
+            const sel = $(`#${filterType}Options .filter-option[data-value="${escapeAttr(String(value))}"]`);
+            sel.removeClass('selected').attr('aria-selected','false').find('input[type="checkbox"]').prop('checked', false);
+            triggerAutoUpdate();
+        }
+
+        function updateHiddenField(filterType) {
+            const vals = selectedFilters[filterType] || [];
+            $(`#${filterType}`).val(vals.join(','));
+        }
+
+        function updateFilterSelectText(filterType) {
+            const values = selectedFilters[filterType] || [];
+            const selectElement = $(`#${filterType}Select`);
+            
+            if (values.length === 0) {
+                selectElement.text(`Select ${filterType.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}`);
+            } else if (values.length === 1) {
+                selectElement.text(values[0]);
+            } else {
+                selectElement.text(`${values.length} selected`);
+            }
+        }
+
+        function triggerAutoUpdate() {
+            if (loadDataTimeout) clearTimeout(loadDataTimeout);
+            updateStatus('Updating data...', 'info');
+            loadDataTimeout = setTimeout(() => { currentPage = 1; loadData(); }, 500);
+        }
+
+        /* ---------- DROPDOWN OPEN/CLOSE ---------- */
+        function setupDropdowns() {
+            const filterConfig = {
+                'industry': { selectId:'industrySelect', dropdownId:'industryDropdown', searchId:'industrySearch', optionsId:'industryOptions' },
+                'sub_industry': { selectId:'subIndustrySelect', dropdownId:'subIndustryDropdown', searchId:'subIndustrySearch', optionsId:'subIndustryOptions' },
+                'job_title': { selectId:'jobTitleSelect', dropdownId:'jobTitleDropdown', searchId:'jobTitleSearch', optionsId:'jobTitleOptions' },
+                'sub_role': { selectId:'subRoleSelect', dropdownId:'subRoleDropdown', searchId:'subRoleSearch', optionsId:'subRoleOptions' },
+                'metro': { selectId:'metroSelect', dropdownId:'metroDropdown', searchId:'metroSearch', optionsId:'metroOptions' },
+                'region': { selectId:'regionSelect', dropdownId:'regionDropdown', searchId:'regionSearch', optionsId:'regionOptions' }
+            };
+
+            Object.entries(filterConfig).forEach(([filterType, cfg]) => {
+                $(`#${cfg.selectId}`).on('click', function(e) {
+                    e.stopPropagation();
+                    toggleDropdown(cfg.dropdownId, filterType);
+                });
+                $(`#${cfg.dropdownId}`).on('click', function(e) { e.stopPropagation(); });
+                $(`#${cfg.searchId}`).on('input', function() {
+                    const q = $(this).val();
+                    searchFilterOptions(filterType, q, 1);
+                });
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.filter-dropdown').length && !$(e.target).closest('.filter-select').length) {
+                    closeAllDropdowns();
+                }
+            });
+
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape') closeAllDropdowns();
+            });
+        }
+
+        function toggleDropdown(dropdownId, filterType) {
+            if (openDropdown === dropdownId) {
+                closeAllDropdowns();
+                return;
+            }
+            closeAllDropdowns();
+            $(`#${dropdownId}`).addClass('open');
+            openDropdown = dropdownId;
+            const search = $(`#${dropdownId} .filter-search`);
+            if (search.length) {
+                search.val('');
+                search.focus();
+            }
+            console.log(`🔽 Opening ${filterType} dropdown`);
+            searchFilterOptions(filterType, '', 1);
+        }
+
+        function closeAllDropdowns() {
+            $('.filter-dropdown').removeClass('open');
+            openDropdown = null;
+            Object.keys(searchTimeouts).forEach(k => {
+                clearTimeout(searchTimeouts[k]);
+                delete searchTimeouts[k];
+            });
+        }
+
+        /* ---------- INITIAL FILTER LOADING ---------- */
+        async function loadInitialFilterOptions() {
+            const filters = ['industry', 'sub_industry', 'job_title', 'sub_role', 'metro', 'region'];
+            for (const filter of filters) {
+                try {
+                    // Skip sub_role if not available
+                    if (filter === 'sub_role' && !hasSubRoleData) {
+                        console.log('⏭️ Skipping sub_role filter - not available');
+                        continue;
+                    }
+                    
+                    // Skip metro if not available
+                    if (filter === 'metro' && !hasMetroData) {
+                        console.log('⏭️ Skipping metro filter - not available');
+                        continue;
+                    }
+                    
+                    console.log(`🔄 Loading initial ${filter} options...`);
+                    const res = await fetch(`${API_URL}/filters/search?type=${filter}&limit=50`);
+                    const data = await res.json();
+                    if (data.success) {
+                        console.log(`✅ Loaded ${data.data.items?.length || 0} ${filter} options`);
+                        renderFilterOptions(filter, data.data.items || [], 1);
+                    } else {
+                        console.error(`❌ Failed to load ${filter} options:`, data.error);
+                    }
+                } catch (err) {
+                    console.error(`Error loading ${filter} options:`, err);
+                }
+            }
+        }
+
+        /* ---------- LOAD & RENDER TABLE ---------- */
+        async function loadData(page = 1) {
+            if (isExporting) return;
+            
+            if (requestController) {
+                try { requestController.abort(); } catch(e) {}
+            }
+            requestController = new AbortController();
+            currentPage = page;
+
+            try {
+                const params = new URLSearchParams({ page: page, limit: limit });
+
+                // Build filter parameters
+                const filters = [
+                    { id:'industry', param:'industry' },
+                    { id:'sub_industry', param:'sub_industry' },
+                    { id:'job_title', param:'job_title' },
+                    { id:'sub_role', param:'sub_role' },
+                    { id:'metro', param:'metro' },
+                    { id:'region', param:'region' }
+                ];
+                
+                filters.forEach(({id,param}) => {
+                    const val = $(`#${id}`).val();
+                    if (val && val.trim() !== '') {
+                        const values = val.split(',').map(v => v.trim()).filter(v => v);
+                        values.forEach(value => {
+                            params.append(param, value);
+                        });
+                    }
+                });
+
+                $("#tableBody").html(`
+                    <tr>
+                        <td colspan="10" class="table-loading">
+                            <div class="loading"></div> Loading optimized data...
+                        </td>
+                    </tr>
+                `);
+
+                const url = `${API_URL}/contacts?${params}`;
+                console.log(`📥 Loading data: ${url}`);
+                const res = await fetch(url, { signal: requestController.signal });
+
+                if (!res.ok) {
+                    if (res.status === 408) {
+                        throw new Error('Query timeout - try simplifying your filters');
+                    }
+                    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                }
+                
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error || 'No data');
+
+                renderTable(data.data.rows || []);
+                totalPages = (data.data.pagination && data.data.pagination.totalPages) ? data.data.pagination.totalPages : 1;
+                totalFilteredRecords = (data.data.pagination && data.data.pagination.totalRecords) ? data.data.pagination.totalRecords : 0;
+                updateStats(data.data.pagination || {});
+                renderPagination();
+                
+                // Update filter availability from response
+                if (data.data.metro_available !== undefined) {
+                    hasMetroData = data.data.metro_available;
+                }
+                
+                updateStatus(`Loaded ${data.data.rows.length} records (Total: ${totalFilteredRecords.toLocaleString()})`, 'success');
+            } catch(err) {
+                if (err.name === 'AbortError') {
+                    console.log('Request aborted');
+                    return;
+                }
+                console.error('Load data error:', err);
+                updateStatus('Failed to load data: ' + (err.message || 'unknown'), 'error');
+                $("#tableBody").html(`
+                    <tr>
+                        <td colspan="10" style="text-align:center; padding:40px; color:#666;">
+                            <div>Error loading data</div>
+                            <div style="font-size:14px; color:#888;">${escapeAttr(err.message || 'Unknown error')}</div>
+                            <button onclick="loadData()" style="margin-top: 10px; padding: 8px 16px; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;">Retry</button>
+                        </td>
+                    </tr>
+                `);
+            } finally {
+                requestController = null;
+            }
+        }
+
+        function updateStats(pagination) {
+            if (!pagination) return;
+            $('#totalContacts').text((pagination.totalRecords !== undefined) ? Number(pagination.totalRecords).toLocaleString() : $('#totalContacts').text());
+            $('#currentPage').text(pagination.currentPage || currentPage);
+            $('#displayedRecords').text(pagination.recordsPerPage || limit);
+            $('#totalPages').text(pagination.totalPages || totalPages);
+        }
+
+        function renderTable(rows) {
+            const tableBody = $("#tableBody");
+            const tableHeader = $("#tableHeader");
+            if (!rows || rows.length === 0) {
+                tableBody.html(`<tr><td colspan="10" style="text-align:center; padding:40px; color:#666;"><div>No records found</div><div style="font-size:14px; color:#888;">Try adjusting your filters</div></td></tr>`);
+                tableHeader.html('');
+                return;
+            }
+            const keys = Object.keys(rows[0]);
+            tableHeader.html(keys.map(k => `<th scope="col">${k.replace(/_/g,' ').replace(/\b\w/g, l => l.toUpperCase())}</th>`).join(''));
+            const fragment = document.createDocumentFragment();
+            rows.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = keys.map(key => {
+                    const value = row[key] !== undefined && row[key] !== null ? row[key] : '';
+                    const displayValue = String(value).length > 100 ? String(value).substring(0,97) + '...' : escapeAttr(String(value));
+                    return `<td title="${escapeAttr(String(value))}">${displayValue}</td>`;
+                }).join('');
+                fragment.appendChild(tr);
+            });
+            tableBody.empty().append(fragment);
+        }
+
+        function renderPagination() {
+            const pagination = $("#pagination");
+            if (totalPages <= 1) { 
+                pagination.html('<div class="pagination-info">Page 1 of 1</div>'); 
+                return; 
+            }
+            
+            let html = `<div class="pagination-info">
+                Page ${currentPage} of ${totalPages} | 
+                Showing ${limit} of ${totalFilteredRecords.toLocaleString()} total records
+            </div>`;
+            
+            html += '<div class="pagination-container">';
+            
+            if (currentPage > 1) {
+                html += `<button data-page="1" title="First Page">««</button>`;
+                html += `<button data-page="${currentPage - 1}" title="Previous Page">← Previous</button>`;
+            }
+            
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+            
+            if (startPage > 1) {
+                html += `<button disabled>...</button>`;
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+            }
+            
+            if (endPage < totalPages) {
+                html += `<button disabled>...</button>`;
+            }
+            
+            if (currentPage < totalPages) {
+                html += `<button data-page="${currentPage + 1}" title="Next Page">Next →</button>`;
+                html += `<button data-page="${totalPages}" title="Last Page">»»</button>`;
+            }
+            
+            html += '</div>';
+            pagination.html(html);
+            
+            pagination.find('button[data-page]').off('click').on('click', function() { 
+                loadData(parseInt($(this).data('page'), 10)); 
+            });
+        }
+
+        /* ---------- OPTIMIZED EXPORTS ---------- */
+        async function exportCSV() {
+            try {
+                showExportProgress();
+                updateStatus('Starting optimized CSV export...', 'info');
+
+                const params = new URLSearchParams();
+                ['industry','sub_industry','job_title','sub_role','metro','region'].forEach(id => {
+                    const val = $(`#${id}`).val();
+                    if (val && val.trim() !== '') {
+                        const values = val.split(',').map(v => v.trim()).filter(v => v);
+                        values.forEach(value => {
+                            params.append(id, value);
+                        });
+                    }
+                });
+
+                $('#progressFill').css('width','10%'); 
+                $('#progressText').text('Initializing streamed export...');
+                
+                const exportUrl = `${API_URL}/export/csv?${params}`;
+                const res = await fetch(exportUrl);
+                if (!res.ok) throw new Error(`Export failed: ${res.status} ${res.statusText}`);
+                
+                $('#progressFill').css('width','30%'); 
+                $('#progressText').text('Streaming data from server...');
+
+                const blob = await res.blob();
+                
+                $('#progressFill').css('width','80%'); 
+                $('#progressText').text('Creating download file...');
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `apollo_database_${new Date().toISOString().split('T')[0]}.csv`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                
+                $('#progressFill').css('width','100%'); 
+                $('#progressText').text('Download complete!');
+                updateStatus(`CSV export started successfully (streamed)`, 'success');
+                setTimeout(hideExportProgress, 2000);
+            } catch (err) {
+                console.error('CSV export error:', err);
+                updateStatus('CSV export failed: ' + (err.message || 'unknown'), 'error');
+                hideExportProgress();
+            }
+        }
+
+        async function exportExcel() {
+            try {
+                showExportProgress();
+                updateStatus('Starting optimized Excel export...', 'info');
+
+                const params = new URLSearchParams();
+                ['industry','sub_industry','job_title','sub_role','metro','region'].forEach(id => {
+                    const val = $(`#${id}`).val();
+                    if (val && val.trim() !== '') {
+                        const values = val.split(',').map(v => v.trim()).filter(v => v);
+                        values.forEach(value => {
+                            params.append(id, value);
+                        });
+                    }
+                });
+
+                $('#progressFill').css('width','10%'); 
+                $('#progressText').text('Preparing Excel export...');
+                
+                // Fetch CSV from backend (streamed)
+                const exportUrl = `${API_URL}/export/csv?${params}`;
+                const res = await fetch(exportUrl);
+                if (!res.ok) throw new Error(`Export failed: ${res.status} ${res.statusText}`);
+                
+                $('#progressFill').css('width','40%'); 
+                $('#progressText').text('Downloading CSV for conversion...');
+
+                const csvText = await res.text();
+
+                $('#progressFill').css('width','60%'); 
+                $('#progressText').text('Converting to Excel...');
+
+                // Parse CSV
+                const rows = csvText.split(/\r?\n/).filter(r => r.trim() !== '').map(r => {
+                    const values = [];
+                    let current = '';
+                    let inQuotes = false;
+                    for (let i = 0; i < r.length; i++) {
+                        const ch = r[i];
+                        if (ch === '"' ) {
+                            if (inQuotes && r[i+1] === '"') { current += '"'; i++; }
+                            else inQuotes = !inQuotes;
+                        } else if (ch === ',' && !inQuotes) {
+                            values.push(current);
+                            current = '';
+                        } else {
+                            current += ch;
+                        }
+                    }
+                    values.push(current);
+                    return values;
+                });
+
+                // Build worksheet
+                const wb = XLSX.utils.book_new();
+                const ws = XLSX.utils.aoa_to_sheet(rows);
+                XLSX.utils.book_append_sheet(wb, ws, 'Apollo Export');
+
+                $('#progressFill').css('width','80%'); 
+                $('#progressText').text('Generating XLSX file...');
+
+                const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+                const blob = new Blob([wbout], { type: "application/octet-stream" });
+
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `apollo_database_${new Date().toISOString().split('T')[0]}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                
+                $('#progressFill').css('width','100%'); 
+                $('#progressText').text('Download complete!');
+                updateStatus(`Excel export completed`, 'success');
+                setTimeout(hideExportProgress, 2000);
+            } catch (err) {
+                console.error('Excel export error:', err);
+                updateStatus('Excel export failed: ' + (err.message || 'unknown'), 'error');
+                hideExportProgress();
+            }
+        }
+
+        /* ---------- EVENTS ---------- */
+        function setupEventListeners() {
+            $("#resetFilters").click(() => {
+                ['industry','sub_industry','job_title','sub_role','metro','region'].forEach(id => {
+                    selectedFilters[id] = [];
+                    $(`#${id}`).val('');
+                    $(`#${id}Bubbles`).empty();
+                    $(`#${id}_count`).text('0 selected');
+                    updateFilterSelectText(id);
+                    
+                    // Reset dropdown options
+                    $(`#${id}Options .filter-option`).each(function() {
+                        $(this).removeClass('selected').attr('aria-selected', 'false')
+                               .find('input[type="checkbox"]').prop('checked', false);
+                    });
+                });
+                updateStatus('All filters reset', 'info');
+                triggerAutoUpdate();
+            });
+
+            $("#refreshData").click(() => {
+                loadData(currentPage);
+                updateStatus('Refreshing data...', 'info');
+            });
+
+            $("#performanceBtn").click(() => {
+                checkPerformance();
+                $('#performancePanel').toggle();
+            });
+
+            $("#downloadCsv").click(exportCSV);
+            $("#downloadExcel").click(exportExcel);
+
+            $("#mobileToggle").click(() => {
+                $("#filters").toggleClass("open");
+                $("#mobileToggle").attr("aria-expanded", 
+                    $("#filters").hasClass("open") ? "true" : "false");
+            });
+
+            $("#recoverError").click(() => {
+                $("#errorBoundary").hide();
+                checkHealth();
+                loadData();
+            });
+
+            // Keyboard navigation for dropdowns
+            $(document).on('keydown', '.filter-dropdown.open', function(e) {
+                const $dropdown = $(this);
+                const $options = $dropdown.find('.filter-option');
+                const $focused = $dropdown.find('.filter-option:focus');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = $focused.length ? $focused.next('.filter-option') : $options.first();
+                    if (next.length) next.focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = $focused.length ? $focused.prev('.filter-option') : $options.last();
+                    if (prev.length) prev.focus();
+                } else if (e.key === 'Enter' && $focused.length) {
+                    e.preventDefault();
+                    $focused.click();
+                }
+            });
+
+            // Window resize handling
+            $(window).on('resize', function() {
+                if ($(window).width() > 768) {
+                    $("#filters").removeClass("open");
+                }
+            });
+
+            // Error boundary for unhandled errors
+            window.addEventListener('error', function(e) {
+                console.error('Global error:', e.error);
+                $("#errorBoundary").show();
+                updateStatus('A critical error occurred', 'error');
+            });
+
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && requestController) {
+                    requestController.abort();
+                }
+            });
+
+            // Performance monitoring
+            setInterval(checkPerformance, 60000); // Check every minute
+        }
+    </script>
+</body>
+</html>
