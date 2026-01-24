@@ -1,21 +1,20 @@
 # GTM Data Platform — End-to-End System (Production-Validated PoC)
 
 ## Overview
-
 This repository documents an **end-to-end GTM (Go-To-Market) data platform**
 designed, built, and operated under real-world constraints, then validated
 through internal usage by Marketing and Lead Generation teams.
 
-The system spans:
+The platform enables **safe, scalable, self-serve GTM data activation**
+without exposing raw infrastructure to non-technical users.
+
+**Scope of the system:**
 - Large-scale GTM data ingestion
-- A performance-aware ingestion warehouse
-- A controlled internal data access and export platform
+- Performance-aware ingestion warehouse
+- Controlled internal data access and export layer
 
-Together, these components enable **safe, scalable, and self-serve GTM data
-activation** without exposing raw infrastructure to non-technical users.
-
-This repository represents a **cohesive data platform**, built to reliably
-process **100GB+ datasets and 120M+ rows** under production-like conditions.
+The system reliably processes **100GB+ datasets and 120M+ rows**
+under production-like conditions and operational constraints.
 
 ---
 
@@ -45,8 +44,8 @@ Scraped GTM Data (CSV)
 │  Streamed Export)              │
 └────────────────────────────────┘
 ```
-Each layer has **clearly defined responsibilities**, explicit boundaries, and
-documented trade-offs.
+Each layer has **clearly defined responsibilities**, explicit boundaries,
+and documented trade-offs.
 
 ---
 
@@ -72,12 +71,12 @@ textbook idealism.
 
 #### Purpose
 Acts as the **central ingestion and staging warehouse** for GTM contact data,
-serving read-heavy filtering and export workflows.
+supporting read-heavy filtering and export workflows.
 
 #### Key Characteristics
 - ~100GB raw CSV ingested  
 - 120M+ contact-level rows  
-- Read-optimized for GTM filtering and segmentation  
+- Read-optimized for GTM segmentation and export  
 - Not designed for OLTP-style updates  
 
 #### Design Highlights
@@ -113,7 +112,8 @@ warehouse with **maximum data retention and recoverability**.
 - Operates reliably on constrained hardware  
 - No silent row drops  
 
-This ETL favors **correctness, traceability, and recovery** over raw throughput.
+This ETL prioritizes **correctness, traceability, and recovery**
+over raw throughput.
 
 ---
 
@@ -134,7 +134,7 @@ without granting direct database access.
 
 #### Key Design Decisions
 - Pagination limits prevent unbounded scans
-- Full data access is exposed only through streaming exports
+- Full data access is exposed only via streaming exports
 - All filters map directly to indexed warehouse columns
 - Designed to operate within ~8GB RAM and outdated CPU constraints
 
@@ -203,4 +203,5 @@ This repository represents **practical data platform engineering**:
 Each component reinforces the others.
 
 **This is not a collection of scripts — it is a system.**
+
 
