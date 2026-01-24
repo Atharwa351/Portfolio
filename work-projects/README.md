@@ -1,20 +1,21 @@
-# GTM Data Platform — End-to-End System (PoC → Production-Validated)
+# GTM Data Platform — End-to-End System (Production-Validated PoC)
 
 ## Overview
 
 This repository documents an **end-to-end GTM (Go-To-Market) data platform**
-designed, built, and operated under real-world constraints.
+designed, built, and operated under real-world constraints, then validated
+through internal usage by Marketing and Lead Generation teams.
 
 The system spans:
-- Large-scale data ingestion
-- A performance-optimized GTM warehouse
-- A controlled internal data access & export platform
+- Large-scale GTM data ingestion
+- A performance-aware ingestion warehouse
+- A controlled internal data access and export platform
 
 Together, these components enable **safe, scalable, and self-serve GTM data
 activation** without exposing raw infrastructure to non-technical users.
 
-This is not a collection of isolated scripts — it is a **cohesive system**
-built to handle **100GB+ datasets and 120M+ rows** in production-like conditions.
+This repository represents a **cohesive data platform**, built to reliably
+process **100GB+ datasets and 120M+ rows** under production-like conditions.
 
 ---
 
@@ -24,66 +25,69 @@ built to handle **100GB+ datasets and 120M+ rows** in production-like conditions
 Scraped GTM Data (CSV)
         │
         ▼
-┌───────────────────────┐
-│  Ingestion ETL Layer  │
-│  (Async, Retention-   │
-│   First Pipeline)     │
-└───────────────────────┘
+┌────────────────────────┐
+│   Ingestion ETL Layer  │
+│   (Async, Retention-   │
+│    First Pipeline)     │
+└────────────────────────┘
         │
         ▼
-┌───────────────────────┐
+┌────────────────────────┐
 │ GTM Ingestion Warehouse│
-│ (Indexed, Denormalized│
-│  PostgreSQL Schema)   │
-└───────────────────────┘
+│ (Indexed, Denormalized │
+│  PostgreSQL Schema)    │
+└────────────────────────┘
         │
         ▼
-┌────────────────────────────┐
-│ GTM Data Access Platform   │
-│ (PoC v1 – Filter, Preview, │
-│  Streamed Export)          │
-└────────────────────────────┘
+┌────────────────────────────────┐
+│ GTM Data Access Platform       │
+│ (v1 – Filtered Preview +       │
+│  Streamed Export)              │
+└────────────────────────────────┘
 ```
-Each layer has **clear responsibilities** and **explicit trade-offs**.
+Each layer has **clearly defined responsibilities**, explicit boundaries, and
+documented trade-offs.
 
 ---
 
 ## Core Design Principles
 
-Across all components, the system is guided by a consistent philosophy:
+Across all components, the system is guided by the following principles:
 
 - **Data retention over premature optimization**
 - **Predictable performance over theoretical purity**
 - **Operational safety over unrestricted flexibility**
-- **Clear separation of concerns**
+- **Clear separation of concerns between layers**
 
-This platform reflects **engineering judgment**, not textbook idealism.
+The platform reflects **engineering judgment shaped by constraints**, not
+textbook idealism.
 
 ---
 
-## Components
+## Platform Components
 
 ### 1️⃣ GTM Ingestion Warehouse — Database Schema (v1)
 
 📁 `database/`
 
 #### Purpose
-Acts as the **central ingestion and staging warehouse** for GTM contact data.
+Acts as the **central ingestion and staging warehouse** for GTM contact data,
+serving read-heavy filtering and export workflows.
 
 #### Key Characteristics
 - ~100GB raw CSV ingested  
 - 120M+ contact-level rows  
-- Designed for read-heavy GTM workflows  
-- Optimized for filtering and export, not OLTP updates  
+- Read-optimized for GTM filtering and segmentation  
+- Not designed for OLTP-style updates  
 
 #### Design Highlights
-- Single denormalized table (`apollo_contacts`)
-- Explicitly indexed based on GTM query patterns
-- Tolerates noisy, incomplete, scraped data
-- Preserves raw emails for downstream enrichment
+- Single denormalized ingestion table (`apollo_contacts`)
+- Explicit indexing aligned with GTM query patterns
+- Tolerates noisy, incomplete, third-party scraped data
+- Preserves raw contact fields for downstream enrichment
 
 Strict normalization was intentionally deferred to preserve ingestion
-resilience and operational simplicity.
+resilience, simplify recovery, and reduce operational overhead.
 
 ---
 
@@ -92,69 +96,69 @@ resilience and operational simplicity.
 📁 `etl/`
 
 #### Purpose
-Asynchronously ingests large, messy Apollo-style CSV datasets into the
-warehouse with **maximum data retention**.
+Asynchronously ingests large, inconsistent Apollo-style CSV datasets into the
+warehouse with **maximum data retention and recoverability**.
 
 #### Key Characteristics
-- Streaming CSV ingestion (no full-file loads)
+- Streaming CSV ingestion (no full-file memory loads)
 - Row-level inserts to avoid batch-level data loss
-- Minimal validation at ingest
+- Minimal validation at ingest time
 - Explicit rejection logging with retry isolation
-- Auto-tuned concurrency based on system resources
-- Heartbeat & watchdog for unattended execution
+- Auto-tuned concurrency based on available system resources
+- Heartbeat and watchdog support for unattended execution
 
 #### Scale & Constraints
-- ~100GB input
-- Long-running jobs
-- Designed to run on constrained infrastructure
-- No silent data drops
+- ~100GB total input volume  
+- Long-running jobs by design  
+- Operates reliably on constrained hardware  
+- No silent row drops  
 
-This ETL prioritizes **correctness and recoverability** over raw throughput.
+This ETL favors **correctness, traceability, and recovery** over raw throughput.
 
 ---
 
-### 3️⃣ GTM Data Access & Export Platform (PoC – v1)
+### 3️⃣ GTM Data Access & Export Platform (v1)
 
 📁 `access-platform-v1/`
 
 #### Purpose
 Provides **controlled, self-serve access** to GTM data for non-technical users
-without exposing direct database access.
+without granting direct database access.
 
 #### Capabilities
 - Authentication-backed access
 - Dropdown-driven GTM filters
-- Indexed query enforcement
-- Bounded pagination (top 100 rows) for preview
+- Enforcement of indexed query paths
+- Bounded preview pagination (top 100 rows)
 - High-throughput streaming exports (CSV / Excel)
 
 #### Key Design Decisions
-- Pagination is intentionally capped to prevent deep scans
-- Full access is provided only via streaming exports
-- Filters map strictly to indexed warehouse columns
-- Designed to operate under ~8GB RAM and outdated CPU
+- Pagination limits prevent unbounded scans
+- Full data access is exposed only through streaming exports
+- All filters map directly to indexed warehouse columns
+- Designed to operate within ~8GB RAM and outdated CPU constraints
 
-This platform validates the **access model and performance envelope**
-before deeper productization.
+This layer validates the **access model, safety boundaries, and performance
+envelope** prior to deeper productization.
 
 ---
 
 ## Ownership & Contributions
 
-### My Responsibilities
+### Primary Ownership
 - End-to-end system architecture
 - Database schema and indexing strategy
-- ETL design and implementation
-- Data contracts between layers
-- Performance and resource trade-offs
+- ETL design, implementation, and recovery logic
+- Data contracts between platform layers
+- Performance, memory, and resource trade-offs
 - Query, pagination, and export constraints
 
 ### Collaborative Implementation
 The access platform was implemented collaboratively with a junior developer
 under my technical direction.
 
-The platform was built in Node.js, which was not my primary stack at the time.
-All database-facing logic, architectural decisions, and system trade-offs were
+While the platform was built in Node.js (not my primary stack at the time),
+all database-facing logic, architectural decisions, and system trade-offs were
 designed, reviewed, and owned by me.
 
 ---
@@ -162,28 +166,28 @@ designed, reviewed, and owned by me.
 ## Why This System Exists
 
 This platform demonstrated that:
-- Massive GTM datasets can be safely ingested and exposed internally
+- Large-scale GTM datasets can be safely ingested and activated internally
 - Index-driven design enables predictable performance at scale
 - Non-technical teams do not require raw database access to operate effectively
-- Strong system boundaries prevent operational and data governance issues
+- Strong system boundaries reduce operational and data governance risk
 
-It reflects **real production constraints**, not hypothetical scenarios.
+It reflects **real operational constraints**, not hypothetical scenarios.
 
 ---
 
-## What This Is — and Is Not
+## Scope & Positioning
 
-### This **IS**:
+### This platform **IS**:
 - A real-world GTM data system
-- Built under constraint
-- Designed for scale, safety, and clarity
-- Honest about trade-offs
+- Designed and built under constraint
+- Focused on scale, safety, and clarity
+- Explicit about trade-offs and limitations
 
-### This is **NOT**:
+### This platform is **NOT**:
 - A BI dashboard
 - A toy analytics project
-- A tutorial clone
-- A fully productized SaaS
+- A tutorial or reference implementation
+- A fully productized SaaS offering
 
 ---
 
@@ -191,12 +195,12 @@ It reflects **real production constraints**, not hypothetical scenarios.
 
 This repository represents **practical data platform engineering**:
 
-- Large-scale ingestion
-- Retention-first ETL
+- Large-scale ingestion under constraint
+- Retention-first ETL design
 - Performance-aware warehousing
-- Controlled data access and export
+- Controlled internal data access and export
 
 Each component reinforces the others.
 
-**It is not a collection of scripts — it is a system.**
+**This is not a collection of scripts — it is a system.**
 
