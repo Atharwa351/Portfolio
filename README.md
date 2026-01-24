@@ -9,7 +9,7 @@ This is **not** a collection of toy notebooks, Kaggle experiments, or visualizat
 
 **Core stack:** SQL · Python · R · Power BI · Tableau · Excel  
 **Operating model:**  
-Ambiguous business problem → structured analysis → clear insight → operational handoff
+*Ambiguous business problem → structured analysis → clear insight → operational handoff*
 
 ---
 
@@ -17,7 +17,7 @@ Ambiguous business problem → structured analysis → clear insight → operati
 
 If you read only three things, read these:
 
-### 1️⃣ Data Infrastructure & ETL (Core Work)
+### 1️⃣ Data Infrastructure & ETL (Flagship Work)
 **Production GTM data system built from scratch**  
 End-to-end ETL, database design, validation logic, and controlled access.
 
@@ -91,7 +91,7 @@ Sales background → analytics optimized for **actionable signals**, not theoret
 **After:** Reusable, queryable GTM data foundation  
 **Role:** Sole designer and implementer
 
-#### Problem context
+#### Problem Context
 - Large CSV volumes with no queryable structure  
 - Data 2+ years old → only ~25% realistically usable  
 - Severe infrastructure constraints required careful batching and validation
@@ -103,16 +103,17 @@ Sales background → analytics optimized for **actionable signals**, not theoret
 
 #### Architecture
 Ingest → Validate → Transform → Load → Query  
+
 - Batch ingestion capped at 1,000 rows  
 - Schema normalization for inconsistent third-party data  
-- Explicit trade-off: reliability and data integrity over ingestion speed
+- Explicit trade-off: **reliability and data integrity over ingestion speed**
 
 #### Enablement
 - Led interns building a frontend interface  
 - Enabled GTM teams to self-serve without SQL access  
 - Enforced controlled access to protect schema and data integrity
 
-#### Outcome
+#### Outcomes
 - Converted raw dumps into a reusable GTM dataset  
 - Eliminated CSV-driven workflows  
 - Reduced wasted outbound effort caused by stale data  
@@ -123,7 +124,7 @@ Ingest → Validate → Transform → Load → Query
 
 ---
 
-## 📈 Revenue & Operations Analytics (Applied Academic)
+## 📈 Revenue & Operations Analytics (Applied)
 
 ### CLTV & Expense Forecasting
 - Top 20% of accounts ≈ 65% of projected CLTV  
@@ -159,7 +160,7 @@ Dashboards emphasize **decision signals**, not visual polish.
 
 ---
 
-## 🤖 Machine Learning & Simulation (Supporting)
+## 🤖 Models & Simulations (Supporting)
 
 Used to build **analytical intuition**, not production ML:
 - Salary Prediction  
