@@ -1,192 +1,145 @@
-# 📊 Atharva Malawade — Revenue & Business Operations Analytics Portfolio
+# 📊 Atharva Malawade — Revenue & GTM Analytics Portfolio
 
 ## TL;DR
-I build **production-grade analytics systems** for Revenue, Operations, and Go-To-Market (GTM) teams—most often in environments where **no usable data infrastructure exists**.
+I build **production-grade analytics and data systems for Revenue, GTM, and Operations teams**, typically in environments where usable data infrastructure does not exist.
 
-This repository shows how messy, real-world business data is turned into **decision-driven operating systems** that support targeting, forecasting, prioritization, and execution.
+This portfolio demonstrates how **messy, decaying business data** is converted into **decision-ready systems** that directly influence targeting, prioritization, forecasting, and execution.
 
-This is **not** a collection of toy notebooks, Kaggle experiments, or visualization-only dashboards.
+This is applied, production-oriented work—not academic exercises.
 
-**Core stack:** SQL · Python · R · Power BI · Tableau · Excel  
-**Operating model:**  
-*Ambiguous business problem → structured analysis → clear insight → operational handoff*
-
----
-
-## 🔎 Start Here (2-minute skim)
-
-If you read only three things, read these:
-
-### 1️⃣ Data Infrastructure & ETL (Flagship Work)
-**Production GTM data system built from scratch**  
-End-to-end ETL, database design, validation logic, and controlled access.
-
-### 2️⃣ Revenue Forecasting & CLTV
-Applied forecasting and behavioral segmentation tied **directly** to operating decisions—not model scores.
-
-### 3️⃣ Dashboards
-Tableau & Power BI dashboards built for **decision-making**, not visual polish.
-
-Each folder includes a short README covering:  
-**problem · constraints · approach · business relevance**
+**Core stack:** SQL · Python · R · Power BI · Tableau  
+**Operating model:** Ambiguous business problem → structured analysis → operational decision
 
 ---
 
-## 🧭 Executive Snapshot
-
-- Built the company’s **first marketing data and storage infrastructure** (Python ETL + PostgreSQL) from zero  
-  → no database, pipeline, or storage layer existed beforehand
-- Processed **150M+ rows / 50GB+ raw CSV data**, converting idle, decaying datasets into a reusable GTM data foundation
-- Determined that **only ~25% of legacy data was viable**, directly reshaping:
+## Executive Snapshot
+- Designed and built the company’s **first GTM data platform** from scratch  
+- Processed **150M+ rows / 50GB+ raw CSV data** (Apollo + LinkedIn Navigator)  
+- Identified that only **~25% of legacy data was viable**, reshaping:
   - ICP definitions  
   - Targeting rules  
-  - Outbound prioritization
-- Shifted marketing from **volume-led execution** to **query-driven, intent-led execution**, reducing wasted outbound effort and improving qualified lead focus
-- Delivered under real constraints:
-  - Old hardware  
-  - Weak infrastructure  
-  - Strict batching limits  
-  - Time pressure
-- End-to-end owner of the system: **design · implementation · documentation · handoff**
-- Led interns to build a **controlled frontend access layer**, enabling non-technical teams to self-serve while preserving schema integrity
+  - Outbound prioritization  
+- Eliminated CSV-based workflows and enabled **query-driven GTM execution**
+- Sole owner: **architecture, ETL, validation, documentation, and handoff**
+- Led interns to build a **controlled frontend access layer** for non-technical teams
 
-**Best suited for:** startup and mid-sized environments where ownership, clarity, and execution matter more than tooling buzzwords.
+Best suited for **startup and mid-sized environments** where ownership, clarity, and execution matter more than tooling buzzwords.
 
 ---
 
-## 📦 What This Repository Contains (by design)
+## 🔑 Flagship Project — GTM Data Platform (Production)
 
-This repository combines **production systems** and **applied analytics**, framed for business relevance—not academic completeness.
+### Problem
+Marketing and Lead Generation teams operated on fragmented, aging CSV dumps with:
+- No database
+- No validation
+- No reusable structure
+- No safe self-serve access
 
-### 🔹 Primary Work
-**Production GTM Data System (ETL + Database)**  
-Actively used by Marketing and Lead Generation teams.
+Data quality had silently degraded over time, leading to wasted outbound effort.
 
-### 🔹 Applied Analytics
-Forecasting, BI, modeling, and simulations framed around **operating decisions**, not model performance.
+### Solution
+Designed and implemented an **end-to-end GTM data platform**:
 
-### 🔹 Strategy & Research (Supporting)
-GTM strategy and market analysis projects from MBA coursework.  
-Included intentionally to demonstrate **analytical reasoning and business framing**, not production ownership.
+**Architecture**  
+Ingest → Validate → Transform → Load → Query
 
----
+- Python-based ETL with strict validation  
+- PostgreSQL schema normalized for inconsistent third-party data  
+- Batch ingestion capped at 1,000 rows for reliability under weak infrastructure  
+- Explicit trade-off: **data integrity over ingestion speed**
 
-## 🔎 How I Work
+**Scale**
+- ~100M rows — LinkedIn Navigator  
+- ~76M rows — Apollo.io  
+- ~50GB+ raw CSV data
 
-- Translate ambiguous business problems into structured analytical questions  
-- Build data models, dashboards, and pipelines that support **real decisions**
-- Work cross-functionally with Sales, Marketing, and Operations
-- Prioritize clarity and usability over technical novelty
-- Deliver work designed to be **used**, not admired
+### Enablement
+- Led interns to build a **controlled frontend access layer**
+- Enabled Sales & Marketing teams to self-serve without direct SQL access
+- Preserved schema integrity and reduced operational risk
 
-Sales background → analytics optimized for **actionable signals**, not theoretical perfection.
+### Impact
+- Converted idle CSV dumps into a reusable GTM data foundation  
+- Eliminated manual CSV-driven workflows  
+- Reduced outbound waste caused by stale data  
+- Enabled **query-driven, intent-led execution**  
+- Established a repeatable GTM data operating system  
 
----
-
-## 🧩 Data Infrastructure & ETL — Production System
-
-### Marketing & Lead-Generation Data Platform
-
-**Before:** Fragmented, unused CSV dumps  
-**After:** Reusable, queryable GTM data foundation  
-**Role:** Sole designer and implementer
-
-#### Problem Context
-- Large CSV volumes with no queryable structure  
-- Data 2+ years old → only ~25% realistically usable  
-- Severe infrastructure constraints required careful batching and validation
-
-#### Scale
-- ~76M rows (Apollo.io)  
-- ~100M rows (LinkedIn Navigator)  
-- ~50GB+ raw CSVs
-
-#### Architecture
-Ingest → Validate → Transform → Load → Query  
-
-- Batch ingestion capped at 1,000 rows  
-- Schema normalization for inconsistent third-party data  
-- Explicit trade-off: **reliability and data integrity over ingestion speed**
-
-#### Enablement
-- Led interns building a frontend interface  
-- Enabled GTM teams to self-serve without SQL access  
-- Enforced controlled access to protect schema and data integrity
-
-#### Outcomes
-- Converted raw dumps into a reusable GTM dataset  
-- Eliminated CSV-driven workflows  
-- Reduced wasted outbound effort caused by stale data  
-- Enabled query-driven execution with improved qualified lead focus  
-- Established a repeatable GTM data foundation
-
-*(Screenshots included; sanitized schema available.)*
+(Screenshots included; schema sanitized.)
 
 ---
 
 ## 📈 Revenue & Operations Analytics (Applied)
 
+### Revenue Forecasting
+- Weekly revenue forecasting using **ARIMA & Exponential Smoothing**
+- Framed for pipeline planning and predictability—not model novelty
+
 ### CLTV & Expense Forecasting
-- Top 20% of accounts ≈ 65% of projected CLTV  
-- Framed for CAC optimization and prioritization
-
-### Weekly Revenue Forecasting
-- ARIMA & Exponential Smoothing  
-- Framed for pipeline planning and predictability
+- Identified top **20% of accounts contributing ~65% of projected CLTV**
+- Used for CAC optimization and account prioritization
 
 ---
 
-## 📊 Dashboards
+## 📊 Dashboards (Decision-Focused)
 
-### CRM Account Segmentation — Tableau
-- Subsidiaries ≈ 18% of total revenue  
-- Used for ABM focus and prioritization
+Dashboards are built to surface **decision signals**, not visual polish.
 
-### Stock Volatility — Power BI
-- Trend shifts and anomaly detection  
-- Used for scenario planning and timing analysis
+- **CRM Account Segmentation (Tableau)**  
+  Subsidiaries ≈ 18% of total revenue  
+  Used for ABM focus and prioritization
 
-Dashboards emphasize **decision signals**, not visual polish.
+- **Stock Volatility & Trend Analysis (Power BI)**  
+  Trend shifts and anomaly detection  
+  Used for scenario planning and timing analysis
 
 ---
 
-## 🧠 Market & Customer Intelligence (Supporting)
+## 🧠 Market & Customer Intelligence
 
 - **Conjoint Analysis**  
-  Survey → analysis → GTM trade-offs  
-  Price + RAM explained >70% of preference utility
+  Price and RAM explained >70% of preference utility  
+  Used to evaluate GTM trade-offs
+
 - **Market Basket Analysis (R)**  
   Cross-sell and bundling insights
 
 ---
 
-## 🤖 Models & Simulations (Supporting)
-
-Used to build **analytical intuition**, not production ML:
+## 🧪 Analytical Foundations (Exploratory)
+Models and simulations used to build analytical intuition—not deployed production ML:
 - Salary Prediction  
-- Lead Scoring (82% accuracy)  
+- Lead Scoring  
 - Manual Gradient Descent  
 - MNIST Classification  
-- Neural Network Revenue Simulation
+- Revenue Simulation via Neural Networks  
 
 ---
 
 ## 📚 Strategy & Research (Supporting)
-
-- Birla Paints — GTM Strategy (SWOT + Porter)  
-- Street Vendor Impact Study — Urban GTM
+Included to demonstrate business framing and structured reasoning:
+- GTM Strategy — Birla Paints (SWOT + Porter)  
+- Urban GTM Impact Study — Street Vendors  
 
 ---
 
-## 👨‍💼 About Me
+## How I Work
+- Translate ambiguous business problems into structured analytical questions  
+- Build systems designed for **use**, not admiration  
+- Optimize for clarity, reliability, and adoption  
+- Work cross-functionally with Sales, Marketing, and Operations  
+- Sales background → analytics optimized for **actionable signals**, not theoretical perfection  
 
+---
+
+## About Me
 MBA — Data Analytics  
-Experience across Sales, Operations, and Analytics  
+Background across **Sales, Revenue Operations, and Analytics**
 
 **Core strength:** turning messy business reality into structured, executable systems.
 
 ---
 
-## 🤝 Let’s Connect
-
-If you’re building data-driven operating systems from imperfect reality—and value **execution over theory**—I’m happy to connect.
+## Let’s Connect
+If you’re building data-driven operating systems from imperfect reality—and value execution over theory—I’m open to conversations.
