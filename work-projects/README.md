@@ -146,20 +146,30 @@ envelope** prior to deeper productization.
 ## Ownership & Contributions
 
 ### Primary Ownership
+I was the **sole owner** of the core data platform, including:
 - End-to-end system architecture
-- Database schema and indexing strategy
-- ETL design, implementation, and recovery logic
-- Data contracts between platform layers
+- Database schema and indexing strategy (PostgreSQL)
+- GTM ingestion ETL design, implementation, and recovery logic
+- Data contracts and boundaries between platform layers
 - Performance, memory, and resource trade-offs
-- Query, pagination, and export constraints
+- Query design, pagination limits, and export constraints
 
-### Collaborative Implementation
-The access platform was implemented collaboratively with a junior developer
-under my technical direction.
+All data-layer behavior, constraints, and failure modes were designed,
+implemented, and validated by me.
 
-While the platform was built in Node.js (not my primary stack at the time),
-all database-facing logic, architectural decisions, and system trade-offs were
-designed, reviewed, and owned by me.
+### Access Platform Implementation
+The GTM data access platform (Node.js) was implemented **collaboratively**
+with a junior developer.
+
+My role included:
+- Defining the access model and safety boundaries
+- Designing query patterns and enforcing indexed access paths
+- Specifying pagination, export, and performance constraints
+- Reviewing database-facing logic and system behavior
+
+While Node.js is not my primary stack, **all architectural
+decisions, data-layer interactions, and trade-offs were owned and reviewed
+by me**.
 
 ---
 
