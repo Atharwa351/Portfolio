@@ -27,7 +27,7 @@ Best suited for **startup and mid-sized environments** where ownership, clarity,
 
 ---
 
-## 🔑 Flagship Project — GTM Data Platform (Production)
+## 🔑 Flagship Project — GTM Data Platform (Production) ['https://github.com/Atharwa351/Portfolio/tree/main/work-projects']
 
 ### Problem
 Marketing and Lead Generation teams operated on fragmented, aging CSV dumps with:
@@ -70,7 +70,7 @@ Ingest → Validate → Transform → Load → Query
 
 ---
 
-## 📈 Revenue & Operations Analytics (Applied)
+## 📈 Revenue & Operations Analytics (Applied) ['https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics']
 
 ### Revenue Forecasting
 - Weekly revenue forecasting using **ARIMA & Exponential Smoothing**
@@ -82,7 +82,7 @@ Ingest → Validate → Transform → Load → Query
 
 ---
 
-## 📊 Dashboards (Decision-Focused)
+## 📊 Dashboards (Decision-Focused) ['https://github.com/Atharwa351/Portfolio/tree/main/dashboards']
 
 Dashboards are built to surface **decision signals**, not visual polish.
 
@@ -96,7 +96,7 @@ Dashboards are built to surface **decision signals**, not visual polish.
 
 ---
 
-## 🧠 Market & Customer Intelligence
+## 🧠 Market & Customer Intelligence ['https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics']
 
 - **Conjoint Analysis**  
   Price and RAM explained >70% of preference utility  
@@ -107,7 +107,7 @@ Dashboards are built to surface **decision signals**, not visual polish.
 
 ---
 
-## 🧪 Analytical Foundations (Exploratory)
+## 🧪 Models and Simulations (Exploratory) ['https://github.com/Atharwa351/Portfolio/tree/main/models-and-simulations']
 Models and simulations used to build analytical intuition—not deployed production ML:
 - Salary Prediction  
 - Lead Scoring  
@@ -117,7 +117,7 @@ Models and simulations used to build analytical intuition—not deployed product
 
 ---
 
-## 📚 Strategy & Research (Supporting)
+## 📚 Strategy & Research (Supporting) ['https://github.com/Atharwa351/Portfolio/tree/main/strategy-and-research']
 Included to demonstrate business framing and structured reasoning:
 - GTM Strategy — Birla Paints (SWOT + Porter)  
 - Urban GTM Impact Study — Street Vendors  
