@@ -68,7 +68,7 @@ Place CSV files in a directory and run:
 
 ```bash
 python ingest_apollo.py /path/to/csv_directory
-
+```
 ## Usage Notes
 
 Accepted files must have a `.csv` extension.
@@ -79,7 +79,7 @@ Logs and summaries are automatically written to:
 etl_logs/
 ├─ rejected_log_YYYYMMDD_HHMMSS.csv
 └─ ingest_summary_YYYYMMDD_HHMMSS.json
-
+```
 ## Validation & Rejection Handling
 
 ### What gets validated
@@ -135,7 +135,7 @@ This enables easy integration with dashboards or alerting systems.
   "validation_failed": 10342,
   "timestamp": "20260115T093012"
 }
-
+```
 ## Future Evolution
 
 The current ETL is optimized for data retention and resilience.  
