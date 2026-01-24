@@ -21,20 +21,22 @@ This is applied, production-oriented work—not academic exercises.
   - Outbound prioritization  
 - Eliminated CSV-based workflows and enabled **query-driven GTM execution**
 - Sole owner: **architecture, ETL, validation, documentation, and handoff**
-- Led interns to build a **controlled frontend access layer** for non-technical teams
+- Led interns to build a **controlled frontend access layer** for non-technical teams  
 
 Best suited for **startup and mid-sized environments** where ownership, clarity, and execution matter more than tooling buzzwords.
 
 ---
 
-## 🔑 Flagship Project — GTM Data Platform (Production)['https://github.com/Atharwa351/Portfolio/tree/main/work-projects']
+## 🔑 Flagship Project — GTM Data Platform (Production)
+📁 **Project folder:**  
+👉 [work-projects](https://github.com/Atharwa351/Portfolio/tree/main/work-projects)
 
 ### Problem
 Marketing and Lead Generation teams operated on fragmented, aging CSV dumps with:
-- No database
-- No validation
-- No reusable structure
-- No safe self-serve access
+- No database  
+- No validation  
+- No reusable structure  
+- No safe self-serve access  
 
 Data quality had silently degraded over time, leading to wasted outbound effort.
 
@@ -52,7 +54,7 @@ Ingest → Validate → Transform → Load → Query
 **Scale**
 - ~100M rows — LinkedIn Navigator  
 - ~76M rows — Apollo.io  
-- ~50GB+ raw CSV data
+- ~50GB+ raw CSV data  
 
 ### Enablement
 - Led interns to build a **controlled frontend access layer**
@@ -70,7 +72,9 @@ Ingest → Validate → Transform → Load → Query
 
 ---
 
-## 📈 Revenue & Operations Analytics (Applied)['https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics']
+## 📈 Revenue & Operations Analytics (Applied)
+📁 **Project folder:**  
+👉 [applied-analytics](https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics)
 
 ### Revenue Forecasting
 - Weekly revenue forecasting using **ARIMA & Exponential Smoothing**
@@ -82,7 +86,9 @@ Ingest → Validate → Transform → Load → Query
 
 ---
 
-## 📊 Dashboards (Decision-Focused)['https://github.com/Atharwa351/Portfolio/tree/main/dashboards']
+## 📊 Dashboards (Decision-Focused)
+📁 **Project folder:**  
+👉 [dashboards](https://github.com/Atharwa351/Portfolio/tree/main/dashboards)
 
 Dashboards are built to surface **decision signals**, not visual polish.
 
@@ -96,7 +102,9 @@ Dashboards are built to surface **decision signals**, not visual polish.
 
 ---
 
-## 🧠 Market & Customer Intelligence['https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics']
+## 🧠 Market & Customer Intelligence
+📁 **Project folder:**  
+👉 [applied-analytics](https://github.com/Atharwa351/Portfolio/tree/main/applied-analytics)
 
 - **Conjoint Analysis**  
   Price and RAM explained >70% of preference utility  
@@ -107,7 +115,10 @@ Dashboards are built to surface **decision signals**, not visual polish.
 
 ---
 
-## 🧪 Models and Simulations (Exploratory)['https://github.com/Atharwa351/Portfolio/tree/main/models-and-simulations']
+## 🧪 Models and Simulations (Exploratory)
+📁 **Project folder:**  
+👉 [models-and-simulations](https://github.com/Atharwa351/Portfolio/tree/main/models-and-simulations)
+
 Models and simulations used to build analytical intuition—not deployed production ML:
 - Salary Prediction  
 - Lead Scoring  
@@ -117,7 +128,10 @@ Models and simulations used to build analytical intuition—not deployed product
 
 ---
 
-## 📚 Strategy & Research (Supporting)['https://github.com/Atharwa351/Portfolio/tree/main/strategy-and-research']
+## 📚 Strategy & Research (Supporting)
+📁 **Project folder:**  
+👉 [strategy-and-research](https://github.com/Atharwa351/Portfolio/tree/main/strategy-and-research)
+
 Included to demonstrate business framing and structured reasoning:
 - GTM Strategy — Birla Paints (SWOT + Porter)  
 - Urban GTM Impact Study — Street Vendors  
