@@ -1,7 +1,7 @@
 # 📊 Atharva Malawade — Revenue & GTM Analytics Portfolio
 
 ## TL;DR
-I build **production-grade analytics and GTM data systems under real-world constraints**, typically in environments where usable data infrastructure does not exist.
+I build and own **production-grade analytics and GTM data systems under real-world constraints**, typically in environments where usable data infrastructure does not exist.
 
 This portfolio shows how **messy, decaying business data** is transformed into **decision-ready operating systems** that directly shape targeting, prioritization, forecasting, and execution.
 
@@ -23,7 +23,7 @@ This is applied, production work—not academic or demo-only analytics.
 - Sole owner: **architecture, ETL, validation, documentation, and handoff**
 - Led interns to build a **controlled frontend access layer** for non-technical teams  
 
-**Best suited for:** startup and mid-sized environments where ownership, clarity, and execution matter more than tooling buzzwords.
+**Designed for:** startup and mid-sized environments where ownership, clarity, and execution matter more than tooling buzzwords.
 
 ---
 
@@ -115,6 +115,16 @@ Dashboards are designed to surface **decision signals**, not visual polish.
 
 ---
 
+## 📚 Strategy & Research (Supporting)
+📁 **Project folder:**  
+👉 [strategy-and-research](https://github.com/Atharwa351/Portfolio/tree/main/strategy-and-research)
+
+Included to demonstrate business framing and structured reasoning:
+- GTM Strategy — Birla Paints (SWOT + Porter)  
+- Urban GTM Impact Study — Street Vendors  
+
+---
+
 ## 🧪 Models and Simulations (Exploratory)
 📁 **Project folder:**  
 👉 [models-and-simulations](https://github.com/Atharwa351/Portfolio/tree/main/models-and-simulations)
@@ -125,16 +135,6 @@ Exploratory models used to build analytical intuition—not deployed production 
 - Manual Gradient Descent  
 - MNIST Classification  
 - Revenue Simulation via Neural Networks  
-
----
-
-## 📚 Strategy & Research (Supporting)
-📁 **Project folder:**  
-👉 [strategy-and-research](https://github.com/Atharwa351/Portfolio/tree/main/strategy-and-research)
-
-Included to demonstrate business framing and structured reasoning:
-- GTM Strategy — Birla Paints (SWOT + Porter)  
-- Urban GTM Impact Study — Street Vendors  
 
 ---
 
