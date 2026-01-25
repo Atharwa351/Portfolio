@@ -14,7 +14,7 @@ This is applied, production work—not academic or demo-only analytics.
 
 ## Executive Snapshot
 - Built and owned the company’s first GTM data platform end-to-end  
-- Processed **150M+ rows / 50GB+ raw CSV data** (Apollo + LinkedIn Navigator)  
+- Processed **120M+ rows / ~100GB+ raw CSV data** (Apollo + LinkedIn Navigator)  
 - Identified that only **~25% of legacy data was viable**, directly reshaping:
   - ICP definitions  
   - Targeting rules  
@@ -53,9 +53,9 @@ Designed and implemented an end-to-end GTM data platform from scratch.
 - Explicit trade-off: **data integrity and trust over ingestion speed**
 
 #### Scale
-- ~100M rows — LinkedIn Navigator  
+- ~60M rows — LinkedIn Navigator  
 - ~76M rows — Apollo.io  
-- ~50GB+ raw CSV data  
+- ~100GB+ raw CSV data  
 
 #### Impact
 - Converted idle CSV dumps into a reusable GTM data foundation  
@@ -64,7 +64,7 @@ Designed and implemented an end-to-end GTM data platform from scratch.
 - Enabled query-driven, intent-led execution  
 - Established a repeatable GTM data operating system  
 
-*(Screenshots included; schema sanitized.)*
+*(schema sanitized.)*
 
 #### Enablement
 - Led interns to build a controlled frontend access layer  
