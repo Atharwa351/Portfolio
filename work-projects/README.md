@@ -2,8 +2,7 @@
 
 ## Overview
 This repository documents an **end-to-end GTM (Go-To-Market) data platform**
-designed, built, and operated under real-world constraints, then validated
-through internal usage by Marketing and Lead Generation teams.
+designed, built, and operated under real-world constraints, with validation through internal usage by Marketing and Lead Generation teams.
 
 The platform enables **safe, scalable, self-serve GTM data activation**
 without exposing raw infrastructure to non-technical users.
